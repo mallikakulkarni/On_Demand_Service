@@ -1,8 +1,9 @@
-use project;
+
 
 SET foreign_key_checks = 0;
 drop database if exists project;
 create database project;
+use project;
 create table service_recipient
 	(
 		email 			varchar(40),
@@ -31,7 +32,7 @@ create table worker
 		worker_id		varchar(10),
         sm_id			varchar(10),
         name			varchar(30),
-        primary key (sm_id, worker_id),
+        primary key (worker_id, sm_id),
         foreign key (sm_id) references small_business(sm_id)
 			on delete cascade
     );
@@ -41,7 +42,8 @@ create table schedule
         date			date,
 		day				varchar(10),
         begin_time		int(4),
-        end_time		int(4)
+        end_time		int(4),
+        primary key (slot_id)
     );
 create table service
 	(
@@ -68,6 +70,7 @@ create table service_record
         worker_id			varchar(10),
         sm_id				varchar(10),
         slot_id				varchar(10),
+        service_id			varchar(10),
         service_recipient	varchar(40),
         service_status		varchar(10),
         payment_status		varchar(10),
@@ -76,5 +79,20 @@ create table service_record
         foreign key (sm_id) references small_business(sm_id),
         foreign key (worker_id) references worker(worker_id),
         foreign key (slot_id) references schedule(slot_id),
+        foreign key (service_id) references service(service_id),
         foreign key (service_recipient) references service_recipient(email)
     );
+    
+create table service_providers
+	(
+		worker_id			varchar(10),
+        sm_id				varchar(10),
+        service_id		varchar(10),
+        primary key (sm_id, worker_id, service_id),
+        foreign key (sm_id) references small_business(sm_id)
+			on delete cascade,
+        foreign key (worker_id) references worker(worker_id)
+			on delete cascade,
+        foreign key (service_id) references service(service_id)
+			on delete cascade
+    )
