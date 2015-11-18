@@ -96,3 +96,16 @@ create table service_providers
         foreign key (service_id) references service(service_id)
 			on delete cascade
     )
+
+CREATE TABLE log (
+  date DATETIME,
+  user_id INT,
+  worker_id INT,
+  small_business_id INT,
+  search_term VARCHAR(45),
+  page_name VARCHAR(45),
+  action VARCHAR(45),
+  user_agent VARCHAR(255),
+  ip_address VARCHAR(45),
+  referrrer VARCHAR(45));
+
