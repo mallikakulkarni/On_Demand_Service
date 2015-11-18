@@ -19,6 +19,7 @@ create table small_business
 	(
 		sm_id			varchar(10),
         email			varchar(40),
+        password		varchar(20),
         street_address 	varchar(25),
         city			varchar(20),
         state			varchar(15),
@@ -96,3 +97,4 @@ create table service_providers
         foreign key (service_id) references service(service_id)
 			on delete cascade
     )
+    

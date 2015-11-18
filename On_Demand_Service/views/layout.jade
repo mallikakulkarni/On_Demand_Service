@@ -12,35 +12,110 @@ html
     link(href="/stylesheets/business-casual.css", rel="stylesheet")
     link(href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800", rel="stylesheet", type="text/css")
     link(href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic", rel="stylesheet", type="text/css")
+    script(type="text/javascript", src="/javascripts/jquery.js")
+    script(type="text/javascript", src="/javascripts/bootstrap.min.js")
   body
     div(class="brand") Business Casual
     div(class="address-bar") 1 Washington Square | San Jose, CA | 123.456.7890
     nav(class="navbar navbar-default", role="navigation")
-    div(class="container")
-        div(class="navbar-header")
-            button(type="button", class="navbar-toggle", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
-                span(class="sr-only") Toggle navigation
-                span(class="icon-bar")
-                span(class="icon-bar")
-                span(class="icon-bar")
-        a(class="navbar-brand", href="index.html") Business Casual
-    div(class="collapse navbar-collapse", id="bs-example-navbar-collapse-1")
-    <ul class="nav navbar-nav">
-    <li>
-    <a href="index.html">Home</a>
-    </li>
-    <li>
-    <a href="about.html">About</a>
-    </li>
-    <li>
-    <a href="blog.html">Blog</a>
-    </li>
-    <li>
-    <a href="contact.html">Contact</a>
-    </li>
-    </ul>
-    </div>
-    <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-    </nav>
+        div(class="container")
+            div(class="navbar-header")
+                button(type="button", class="navbar-toggle", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
+                    span(class="sr-only") Toggle navigation
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+                a(class="navbar-brand", href="/index") Business Casual
+        div(class="collapse navbar-collapse", id="bs-example-navbar-collapse-1")
+            ul(class="nav navbar-nav")
+                li
+                    a(href="#") Home
+                li
+                    a(href="#") About
+                li
+                    a(href="#") Contact
+                li
+                    a(data-toggle="modal", data-target="#recloginmodal") Log in
+    div(class="modal fade", id="recloginmodal", tabindex="-1", role="dialog", aria-labelledby="recloginLabel")
+      div(class="modal-dialog", role="document")
+          div(class="modal-content")
+              div(class="modal-header")
+                  button(type="button", class="close", data-dismiss="modal", aria-label="Close")
+                      span(aria-hidden="true") &times;
+                  h4(class="modal-title", id="recloginLabel") Log In
+              div(class="modal-body")
+                  form(role="form")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label Email
+                              input(type="email", class="form-control", placeholder="email")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label Password
+                              input(type="password", class="form-control", placeholder="Password")
+              div(class="modal-footer")
+                  button(type="submit", class="btn btn-default", data-dismiss="modal") Submit
+                  button(type="button", class="btn btn-default", data-dismiss="modal") Reset
+                  hr
+                  p Don't have an Account?&nbsp
+                      a(data-toggle="modal", data-target="#recsignupmodal", id="signuplink", class="close", data-dismiss="modal") Sign up!
+    div(class="modal fade", id="recsignupmodal", tabindex="-1", role="dialog", aria-labelledby="recsignupLabel")
+      div(class="modal-dialog", role="document")
+          div(class="modal-content")
+              div(class="modal-header")
+                  button(type="button", class="close", data-dismiss="modal", aria-label="Close")
+                      span(aria-hidden="true") &times;
+                  h4(class="modal-title", id="recsignupLabel") Log In
+              div(class="modal-body")
+                  form(role="form")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label Contact Name
+                              input(type="text", class="form-control", placeholder="Contact Name")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label Email
+                              input(type="email", class="form-control", placeholder="Email")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label Password
+                              input(type="password", class="form-control", placeholder="Password")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label Street Address
+                              input(type="text", class="form-control", placeholder="Street Address")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label States
+                              input(list="states")
+                              datalist(id="states")
+                                  option(value="CA")
+                                  option(value="NY")
+                                  option(value="NV")
+                                  option(value="TX")
+                                  option(value="WA")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label City
+                              input(list="city")
+                              datalist(id="city")
+                                  option(value="San Jose")
+                                  option(value="San Francisco")
+                                  option(value="Sacramento")
+                                  option(value="Los Angeles")
+                                  option(value="San Diego")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label Zip
+                              input(type="text", class="form-control", placeholder="Zip")
+                      div(class="row")
+                          div(class="form-group col-lg-4")
+                              label Phone Number
+                              input(type="text", class="form-control", placeholder="Phone number")
+                          hr
+                          p Already have an Account?&nbsp
+                          a(data-toggle="modal", data-target="#recloginmodal", class="close", data-dismiss="modal") Login
+              div(class="modal-footer")
+                  button(type="submit", class="btn btn-default", data-dismiss="modal") Submit
+                  button(type="button", class="btn btn-default", data-dismiss="modal") Reset
+    block content

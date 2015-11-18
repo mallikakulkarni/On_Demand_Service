@@ -1,0 +1,5 @@
+On_Demand_Service/.idea/*
+On_Demand_Service/.idea/workspace.xml
+.idea/
+On_Demand_Service/node_modules/*
+*.DS_Store
