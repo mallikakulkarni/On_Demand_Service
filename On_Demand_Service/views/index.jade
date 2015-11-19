@@ -84,27 +84,27 @@ block content
                             span(aria-hidden="true") &times;
                         h4(class="modal-title", id="sbsignupLabel") Log In
                     div(class="modal-body")
-                        form(role="form")
+                        form(role="form", action="/business/bsignup", method="post")
                             div(class="row")
                                 div(class="form-group col-lg-4")
                                     label Contact Name
-                                    input(type="text", class="form-control", placeholder="Contact Name")
+                                    input(type="text", name='name', required='true', class="form-control", value='XYZ', placeholder="Contact Name")
                             div(class="row")
                                 div(class="form-group col-lg-4")
                                     label Email
-                                    input(type="email", class="form-control", placeholder="Email")
+                                    input(type="email", name='email', value='abc@xyz.com', required='true', class="form-control", placeholder="Email")
                             div(class="row")
                                 div(class="form-group col-lg-4")
                                     label Password
-                                    input(type="password", class="form-control", placeholder="Password")
+                                    input(type="password", name='password', value='password', required='true', class="form-control", placeholder="Password")
                             div(class="row")
                                 div(class="form-group col-lg-4")
                                     label Street Address
-                                    input(type="text", class="form-control", placeholder="Street Address")
+                                    input(type="text", required='true', name='street_address', value='1 Infinite Loop', class="form-control", placeholder="Street Address")
                             div(class="row")
                                 div(class="form-group col-lg-4")
                                     label States
-                                    input(list="states")
+                                    input(list="states", required='true', value='CA', name='state')
                                     datalist(id="states")
                                         option(value="CA")
                                         option(value="NY")
@@ -114,7 +114,7 @@ block content
                             div(class="row")
                                 div(class="form-group col-lg-4")
                                     label City
-                                    input(list="city")
+                                    input(list="city", required='true', value='San Jose', name='city')
                                     datalist(id="city")
                                         option(value="San Jose")
                                         option(value="San Francisco")
@@ -124,14 +124,32 @@ block content
                             div(class="row")
                                 div(class="form-group col-lg-4")
                                     label Zip
-                                    input(type="text", class="form-control", placeholder="Zip")
+                                    input(type="text", required='true', class="form-control", placeholder="Zip", value='95129', name='zip')
                             div(class="row")
                                 div(class="form-group col-lg-4")
                                     label Phone Number
-                                    input(type="text", class="form-control", placeholder="Phone number")
-                    div(class="modal-footer")
-                        button(type="submit", class="btn btn-default", data-dismiss="modal") Submit
-                        button(type="button", class="btn btn-default", data-dismiss="modal") Reset
+                                    input(type="text", required='true', class="form-control", placeholder="Phone number", value='4085551234', name='mobile')
+                            div(class="row")
+                                div(class="finput-group col-lg-4")
+                                    p Select all the services that you offer!
+                                    span(class="input-group-addon")
+                                        label Cleaning
+                                        input(type="checkbox", class="form-control", name='service[]', value='Cleaning', checked)
+                                    span(class="input-group-addon")
+                                        label Lawn Maintenance
+                                        input(type="checkbox", class="form-control",  name='service[]', value='Lawn Maintenance', unchecked)
+                                    span(class="input-group-addon")
+                                        label Nanny Services
+                                        input(type="checkbox", class="form-control",  name='service[]', value='Nanny Services', checked)
+                                    span(class="input-group-addon")
+                                        label Plumbing
+                                        input(type="checkbox", class="form-control",  name='service[]', value='Plumbing', unchecked)
+                                    span(class="input-group-addon")
+                                        label Electrical
+                                        input(type="checkbox", class="form-control",  name='service[]', value='Electrical', unchecked)
+                            div(class="modal-footer")
+                                button(type="submit", class="btn btn-default") Submit
+                                button(type="reset", class="btn btn-default") Reset
     include footer
     script(type="text/javascript").
 
