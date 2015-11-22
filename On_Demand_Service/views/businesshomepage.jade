@@ -1,5 +1,122 @@
 extends layout
 
 block content
-    p Solution
+    div(class="row")
+        div(class="box")
+            div(class="col-lg-12 text-center")
+                h4(class="intro-text text-center") Welcome&nbsp
+                    strong!= name
+                hr
+    div(class="row")
+        div(class="box")
+            div(class="col-lg-12 text-center")
+                h4(class="intro-text text-center", id="JobsHeading") your upcoming jobs
+                hr
+                #upcomingjobs.text-center
+                    table
+                        tbody(id="upcomingjobstable")
+                            tr
+                                td Record Id
+                                td Worker Id
+                                td Worker Name
+                                td Service
+                                td Date
+                                td Begin Time
+                                td End Time
+                                td Status
+                hr
+                p NOTE: Click on any worker Id to check the average rating. The worker is designated outstanding, good or average based on average rating
+                hr
+                p NOTE: Click on any record id to view customer details.
+                hr
+                div(class="btn-group btn-btn-group-justified", role="group")
+                    a(type="button", id="alljobs", class="btn btn-default btn-lg") View all jobs
+                    a(type="button", id="pendingjobs", class="btn btn-default btn-lg") View Pending Jobs
+                hr
+    div(class="modal fade", id="workerratingmodal", tabindex="-1", role="dialog", aria-labelledby="workerratingLabel")
+        div(class="modal-dialog", role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button", class="close", data-dismiss="modal", aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title", id="workerratingLabel") Worker Details
+                div(class="modal-body")
+                    h4(id='workerid') ID -&nbsp
+                    h4(id='workerrating') Rating -&nbsp
+    div(class="modal fade", id="customerviewmodal", tabindex="-1", role="dialog", aria-labelledby="customerviewLabel")
+        div(class="modal-dialog", role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button", class="close", data-dismiss="modal", aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title", id="customerviewLabel") Worker Details
+                div(class="modal-body")
+                    h5(id='customeremail') Email -&nbsp
+                    h4(id='customername') Name -&nbsp
+                    h4(id='customerphone') Mobile Number -&nbsp
+    script(type="text/javascript").
+        var sm_id= !{JSON.stringify(id)}
+        $(document).ready(function() {
+            getJobsFunction('/business/pendingjobs');
+
+            $("body").on('click', '.workerid', function() {
+                var worker_id = this.firstChild.textContent;
+                $.ajax({
+                    url: '/worker/getRating',
+                    type: 'GET',
+                    data: {worker_id: worker_id, sm_id: sm_id},
+                    success: function(result) {
+                        $("#workerid").append(worker_id);
+                        var rating = result[0];
+                        $("#workerrating").append(rating["@worker_rating"]);
+                    }
+                })
+            });
+            $("body").on('click', '.customerview', function() {
+                var record_id = this.firstChild.textContent;
+                $.ajax({
+                    url: '/customer/getPublicData',
+                    type: 'GET',
+                    data: {worker_id: worker_id, sm_id: sm_id},
+                    success: function(result) {
+                        $("#workerid").append(worker_id);
+                        var rating = result[0];
+                        $("#workerrating").append(rating["@worker_rating"]);
+                    }
+                })
+            });
+            $("#alljobs").click(function() {
+                $("#JobsHeading").text('All your jobs');
+                return getJobsFunction('/business/alljobs');
+
+            });
+            $("#pendingjobs").click(function() {
+                $("#JobsHeading").text('Your Upcoming Jobs');
+                return getJobsFunction('/business/pendingjobs');
+
+            })
+            function getJobsFunction(url) {
+                $("#upcomingjobstable tr").slice(1).remove();
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    data: {sm_id: sm_id},
+                    success: function(result) {
+                        for (i = 0; i < result.length; i++) {
+                            var tr;
+                            tr = $('<tr/>');
+                            tr.append("<td class='customerview' data-toggle='modal' data-target='#customerviewmodal'>" + result[i].record_id + "</td>");
+                            tr.append("<td class='workerid' data-toggle='modal' data-target='#workerratingmodal'>" + result[i].worker_id + "</td>");
+                            tr.append("<td>" + result[i].worker + "</td>");
+                            tr.append("<td>" + result[i].service + "</td>");
+                            tr.append("<td>" + result[i].date + "</td>");
+                            tr.append("<td>" + result[i].begin_time + "</td>");
+                            tr.append("<td>" + result[i].end_time    + "</td>");
+                            tr.append("<td>" + result[i].status    + "</td>");
+                            $("#upcomingjobstable").append(tr);
+                        }
+                    }
+                });
+            }
+        });
 

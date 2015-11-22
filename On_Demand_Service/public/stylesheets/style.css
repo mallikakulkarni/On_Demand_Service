@@ -5,3 +5,14 @@
 #projectdropdown > li {
     padding: 10px;
 }
+
+tbody, tr, td {
+    border: double thin gray;
+    padding: 10px;
+}
+
+table {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 2%;
+}
