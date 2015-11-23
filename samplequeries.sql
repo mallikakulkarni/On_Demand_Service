@@ -48,3 +48,13 @@ drop view cutomer_public;
 
 delete from worker where name = 'Jane Doe';
 select * from customer_public;
+
+
+alter table service
+add description varchar(100);
+
+desc service;
+
+update service set description = 'Nanny' where service_id = '2';
+
+select * from service_public;

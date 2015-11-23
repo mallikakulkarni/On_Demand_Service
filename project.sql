@@ -128,7 +128,9 @@ CREATE VIEW customer_public AS
 	SELECT email, name, mobile
 	FROM service_recipient
 
+create or replace view service_public as (select name, description from service);
 
+create or replace view contractor_details as (select )
 
 DELIMITER '$';
 CREATE PROCEDURE GetJobs(
