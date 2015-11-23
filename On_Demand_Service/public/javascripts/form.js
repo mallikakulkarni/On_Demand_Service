@@ -37,21 +37,3 @@ script(type="text/javascript").
             e.preventDefault();
         });
     });
-//div(class="row")
-//    div(class="finput-group col-lg-4")
-//        p Select all the services that you offer!
-//        span(class="input-group-addon")
-//            label Cleaning
-//            input(type="checkbox", class="form-control", name='service[]', value='Cleaning', checked)
-//        span(class="input-group-addon")
-//            label Lawn Maintenance
-//            input(type="checkbox", class="form-control",  name='service[]', value='Lawn Maintenance', unchecked)
-//        span(class="input-group-addon")
-//            label Nanny Services
-//            input(type="checkbox", class="form-control",  name='service[]', value='Nanny Services', checked)
-//        span(class="input-group-addon")
-//            label Plumbing
-//            input(type="checkbox", class="form-control",  name='service[]', value='Plumbing', unchecked)
-//        span(class="input-group-addon")
-//            label Electrical
-//            input(type="checkbox", class="form-control",  name='service[]', value='Electrical', unchecked)

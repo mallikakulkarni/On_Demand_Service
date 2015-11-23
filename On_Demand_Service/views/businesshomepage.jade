@@ -33,6 +33,43 @@ block content
                     a(type="button", id="alljobs", class="btn btn-default btn-lg") View all jobs
                     a(type="button", id="pendingjobs", class="btn btn-default btn-lg") View Pending Jobs
                 hr
+    div(class="row")
+        div(class="box")
+            div(class="col-lg-12 text-center")
+                h4(class="intro-text text-center") Add a work man
+                    div(id='warningtext')
+                    form(role="form", id="workersignupform")
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label Worker Name
+                                input(type="text", id='workername', name='name', class="form-control", placeholder="name", value="Jane Doe")
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label Password
+                                input(type="password", id='workerpassword', name='password', class="form-control", placeholder="Password", value="secret")
+                        div(class="row")
+                            div(class="input-group col-lg-4")
+                                p Select all the services that you offer!
+                                span(class="input-group-addon")
+                                    label Cleaning
+                                    input(type="checkbox", class="form-control services", name='service[]', value='Cleaning', checked)
+                                span(class="input-group-addon")
+                                    label Lawn Maintenance
+                                    input(type="checkbox", class="form-control services",  name='service[]', value='Lawn Maintenance', unchecked)
+                                span(class="input-group-addon")
+                                    label Nanny Services
+                                    input(type="checkbox", class="form-control services",  name='service[]', value='Nanny Services', checked)
+                                span(class="input-group-addon")
+                                    label Plumbing
+                                    input(type="checkbox", class="form-control services",  name='service[]', value='Plumbing', unchecked)
+                                span(class="input-group-addon")
+                                    label Electrical
+                                    input(type="checkbox", class="form-control services",  name='service[]', value='Electrical', unchecked)
+                        hr
+                        div(class="btn-group btn-btn-group-justified", role="group")
+                            input(type="submit", class="btn btn-default btn-lg")
+                            input(type="reset", class="btn btn-default btn-lg")
+                hr
     div(class="modal fade", id="workerratingmodal", tabindex="-1", role="dialog", aria-labelledby="workerratingLabel")
         div(class="modal-dialog", role="document")
             div(class="modal-content")
@@ -49,13 +86,14 @@ block content
                 div(class="modal-header")
                     button(type="button", class="close", data-dismiss="modal", aria-label="Close")
                         span(aria-hidden="true") &times;
-                    h4(class="modal-title", id="customerviewLabel") Worker Details
+                    h4(class="modal-title", id="customerviewLabel") Customer Details
                 div(class="modal-body")
-                    h5(id='customeremail') Email -&nbsp
+                    h4(id='customeremail') Email -&nbsp
                     h4(id='customername') Name -&nbsp
                     h4(id='customerphone') Mobile Number -&nbsp
     script(type="text/javascript").
         var sm_id= !{JSON.stringify(id)}
+        var workerObj, servicesObj = [];
         $(document).ready(function() {
             getJobsFunction('/business/pendingjobs');
 
@@ -77,13 +115,13 @@ block content
                 $.ajax({
                     url: '/customer/getPublicData',
                     type: 'GET',
-                    data: {worker_id: worker_id, sm_id: sm_id},
+                    data: {record_id: record_id},
                     success: function(result) {
-                        $("#workerid").append(worker_id);
-                        var rating = result[0];
-                        $("#workerrating").append(rating["@worker_rating"]);
+                        $("#customeremail").append(result.email);
+                        $("#customername").append(result.name);
+                        $("#customerphone").append(result.mobile);
                     }
-                })
+                });
             });
             $("#alljobs").click(function() {
                 $("#JobsHeading").text('All your jobs');
@@ -94,7 +132,51 @@ block content
                 $("#JobsHeading").text('Your Upcoming Jobs');
                 return getJobsFunction('/business/pendingjobs');
 
-            })
+            });
+            $("#workersignupform").submit(function(e) {
+                console.log('Here');
+                var formValues = ['workername', 'workerpassword'];
+                var objValues = ['name', 'password'];
+                var reqObj = {};
+                for (i = 0; i < formValues.length; i++) {
+                    console.log(formValues[i]);
+                    console.log(document.getElementById(formValues[i]));
+                    console.log(document.getElementById(formValues[i]).value);
+                    reqObj[objValues[i]] = document.getElementById(formValues[i]).value;
+                }
+                workerObj = reqObj;
+                servicesObj = $("#workersignupform input:checkbox:checked").map(function () {
+                    return $(this).val();
+                }).get();
+                $.ajax({
+                    url: '/worker/signup',
+                    type: 'POST',
+                    data: {workerObj: workerObj, servicesObj: servicesObj, sm_id: sm_id},
+                    success: function (res) {
+                        console.log(res);
+                        if (res) {
+                            $("#warningtext").html('<p> You seemed to already have created a worker record with' +
+                            'the same name. Are you sure you want to proceed? Click Ok to proceed and Cancel' +
+                            'to cancel request</p><button id="workersignupconfirmbutton">OK</button>' +
+                            '<button>Cancel</button>')
+                        } else {
+                            $("#warningtext").html('<p>Successful</p>');
+                        }
+                    }
+                });
+                e.preventDefault();
+            });
+            $("body").on('click', '#workersignupconfirmbutton', function() {
+                var confirm = true;
+                $.ajax({
+                    url: '/worker/signup',
+                    type: 'POST',
+                    data: {workerObj: workerObj, servicesObj: servicesObj, confirm: confirm, sm_id: sm_id},
+                    success: function(res) {
+                        $("#warningtext").html('<p>Successful</p>');
+                    }
+                });
+            });
             function getJobsFunction(url) {
                 $("#upcomingjobstable tr").slice(1).remove();
                 $.ajax({

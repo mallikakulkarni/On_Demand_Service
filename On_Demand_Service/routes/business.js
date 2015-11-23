@@ -60,7 +60,7 @@ function createConnection() {
 
 function checkBusinessExists(email, cb) {
     var exists = null;
-    var connection = createConnection();
+    var connection = createConnection({multipleStatements: true});
     connection.connect();
     connection.query('SELECT * FROM small_business_review WHERE email = "'+email+'"', function(err, rows, fields) {
         if (err) throw err;

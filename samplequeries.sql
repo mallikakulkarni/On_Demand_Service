@@ -2,10 +2,16 @@ use project;
 
 select * from service_record;
 select * from service;
-select * from service_recipient;
+select * from service_provider;
 select * from worker;
+select * from service_recipient;
 select * from small_business;
 select * from schedule;
+
+delete from service_provider;
+delete from worker where worker_id ='66392517';
+SELECT * FROM WORKER WHERE name = "John Deer" AND sm_id = "58934997";
+select * from service where name in ("cleaning", "nanny services");
 
 DROP PROCEDURE getJobs;
 DROP PROCEDURE getRating;
@@ -21,6 +27,8 @@ insert into schedule values ('1', now(), 'Saturday', 0800, 1159);
 insert into schedule values ('2', now(), 'Saturday', 1200, 1559);
 insert into schedule values ('3', now(), 'Saturday', 1600, 1959);
 insert into schedule values ('4', now(), 'Saturday', 2000, 2359);
+
+insert into service values('2', 'Nanny Services');
 
 insert into worker values ('123456', '58934997', 'secret', 'John Deer');
 
@@ -38,3 +46,5 @@ select * from getRating;
 
 drop view cutomer_public;
 
+delete from worker where name = 'Jane Doe';
+select * from customer_public;
