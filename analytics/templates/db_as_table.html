@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Log as Table {% endblock %}
+
+{% block content %}
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Timestamp</th>
+            <th>user ID</th>
+            <th>Worker ID</th>
+            <th>Small Business ID</th>
+            <th>Search term</th>
+            <th>Page name</th>
+            <th>Action</th>
+            <th>User Agent</th>
+            <th>IP Address</th>
+            <th>Referrer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for log_item in log %}
+        <tr>
+            <th>{{ log_item.log_date }}</th>
+            <th>{{ log_item.log_timestamp }}</th>
+            <th>{{ log_item.user_id }}</th>
+            <th>{{ log_item.worker_id }}</th>
+            <th>{{ log_item.business_id }}</th>
+            <th>{{ log_item.search_term }}</th>
+            <th>{{ log_item.page_name }}</th>
+            <th>{{ log_item.action }}</th>
+            <th>{{ log_item.user_agent }}</th>
+            <th>{{ log_item.ip_address }}</th>
+            <th>{{ log_item.referrer }}</th>
+        </tr>
+        {% endfor %}
+        </tbody>
+        <!--{{log}}-->
+    </table>
+</div>
+
+{% endblock %}
+
