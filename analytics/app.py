@@ -59,7 +59,6 @@ def daily_visits():
                 {
                     "_id":
                         {
-                            # "ip_address": "$ip_address",
                             "date": "$log_date"
                         },
                     "count":
@@ -76,12 +75,12 @@ def daily_visits():
 def daily_registered_visits():
     res = list(db.log.aggregate([
         {
-            "$project":
+            "$match":
                 {
-                    "log_date": 1,
-                    "user_registered": {
-                        "$ne": ["$user_id", ""]
-                    }
+                    "user_id":
+                        {
+                            "$gt": 0
+                        }
                 }
         },
         {
@@ -89,8 +88,6 @@ def daily_registered_visits():
                 {
                     "_id":
                         {
-                            # "$cond": [{"$eq": ["$user_id", ""]}, False],
-                            # "user_id": "$user_id",
                             "date": "$log_date"
                         },
                     "count":

@@ -39,3 +39,12 @@ Admin data
 ###Visits per user_id
 <p>`/admin/visits_by_registered_users`</p>
 >We are counting the number of visits by unique user_id and showing the result.
+
+###Daily visits
+<p>`/admin/daily_visits`</p>
+>We are counting the number of users per day.
+
+###Daily Registered Visits
+<p>`/admin/daily_registered_visits`</p>
+>We are counting the number of registered users visiting the site per day.
+
