@@ -1,0 +1,40 @@
+//
+   Created by Varsha on 11/25/2015.
+doctype html5
+html
+    head
+        title ODS Admin
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/admin_style.css')
+        link(href='https://fonts.googleapis.com/css?family=Exo', rel = 'stylesheet', type = 'text/css')
+    body
+        div.container
+            div.row
+                h2.text-center Admin Dashboard
+            div.row
+                div.col-lg-2.col-md-2
+                    div.card
+                        p.custom-number#tv
+                        p.custom-title Total Visitors
+                div.col-lg-2.col-md-2
+                    div.card
+                        p.custom-number#rv
+                        p.custom-title Registered Visitors
+                div.col-lg-2.col-md-2
+                    div.card
+                        p.custom-number#vip
+                        p.custom-title Visits per IP
+                div.col-lg-2.col-md-2
+                    div.card
+                        p.custom-number#vpi
+                        p.custom-title Visits per ID
+
+    h1= title
+    p Welcome #{name},(#{id})
+
+    div(class="dashboard")
+        form(method="post" action = "/admin/signin")
+
+           div(class="")
+               button(type="button", id="activate", class="btn btn-default") Activate
+               button(type="button", id="deactivate", class="btn btn-default") Deactivate

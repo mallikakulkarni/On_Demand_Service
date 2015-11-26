@@ -25,6 +25,7 @@ create table small_business
         zip				int,
         mobile			bigint(8),
         name			varchar(30),
+        activate		bool NOT NULL DEFAULT false ,
 		primary key (sm_id, email)
     );
 create table worker
@@ -108,7 +109,8 @@ CREATE TABLE log (
   action VARCHAR(45),
   user_agent VARCHAR(255),
   ip_address VARCHAR(45),
-  referrrer VARCHAR(45));
+  referrrer VARCHAR(45)
+  );
 
 create table small_business_review
 	(
@@ -123,16 +125,40 @@ create table small_business_review
         name			varchar(30),
 		primary key (sm_id, email)
     );
+
+create table small_business_activation
+	(
+		sm_id 			varchar(10),
+        name			varchar(10),
+        activate		bool,
+        date			DATETIME,
+        primary key(sm_id),
+        foreign key (sm_id) references small_business(sm_id)
+			on delete cascade  
+    );
+    
+create table admin
+	(
+		admin_id 		int,
+        first_name		varchar(10),
+        last_name 		varchar(10),
+        password		varchar(10),
+        primary key(admin_id)
+    );
+    
     
 CREATE VIEW customer_public AS
 	SELECT email, name, mobile
-	FROM service_recipient
+	FROM service_recipient;
 
 create or replace view service_public as (select name, description from service);
 
 create or replace view contractor_details as (select )
 
+
+
 DELIMITER '$';
+
 CREATE PROCEDURE GetJobs(
 	in id varchar(10))
 BEGIN
