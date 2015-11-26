@@ -4,3 +4,4 @@ On_Demand_Service/.idea/workspace.xml
 On_Demand_Service/node_modules/*
 *.DS_Store
 *.pyc
+analytics/*.pyc
