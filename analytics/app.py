@@ -71,16 +71,45 @@ def count_visits():
     res = list(db.log.aggregate([
         {"$group": {"_id": "$ip_address", "count": {"$sum": 1}}}
     ]))
-    return make_response(json.dumps(res))
+    avg = c = total = 0
+    for r in res:
+        c += 1
+        total += r['count']
+    if c != 0:
+        avg = total/c
+    return make_response(json.dumps({"average": avg}))
 
 
 @app.route("/admin/visits_by_registered_users")
 @send_json
 def count_registered_visits():
     res = list(db.log.aggregate([
-        {"$group": {"_id": "$user_id", "count": {"$sum": 1}}}
+        {
+            "$match": {
+                "user_id":
+                    {
+                        "$gt": 0
+                    }
+            }
+        },
+        {
+            "$group":
+                {
+                    "_id": "$user_id",
+                    "count":
+                        {
+                            "$sum": 1
+                        }
+                }
+        }
     ]))
-    return make_response(json.dumps(res))
+    avg = c = total = 0
+    for r in res:
+        c += 1
+        total += r['count']
+    if c!= 0:
+        avg = total/c
+    return make_response(json.dumps({"average": avg}))
 
 
 @app.route("/admin/daily_visits")
@@ -207,6 +236,88 @@ def business_daily_registered_visits():
                                 "$gt": 0
                             },
                         "business_id": business_id
+                    }
+            },
+            {
+                "$group":
+                    {
+                        "_id":
+                            {
+                                "date": "$log_date"
+                            },
+                        "count":
+                            {
+                                "$sum": 1
+                            }
+                    }
+            }
+        ]))
+        resp = make_response(json.dumps({"results": res}, default=json_util.default))
+        resp.headers['Content-Type'] = 'application/json'
+        return resp
+    else:
+        return render_template("error.html"), 400
+
+
+@app.route("/worker/total_registered_visits")
+def total_registered_visits():
+    try:
+        worker_id = int(request.args.get("worker_id"))
+    except TypeError:
+        return render_template("error.html"), 400
+    if worker_id:
+        count = db.log.find(
+            {
+                "worker_id": worker_id,
+                "user_id": {
+                    "$nin": ["", None]
+                },
+                "page_name": "worker",
+                "action": "page_load"
+            }
+        ).count()
+        resp = make_response(json.dumps({"count": count}, default=json_util.default))
+        resp.headers['Content-Type'] = 'application/json'
+        return resp
+    else:
+        return render_template("error.html"), 400
+
+
+@app.route("/worker/total_registered_clicks")
+def total_registered_clicks():
+    worker_id = int(request.args.get("worker_id"))
+    if worker_id:
+        count = db.log.find(
+            {
+                "worker_id": worker_id,
+                "user_id": {
+                    "$nin": ["", None]
+                },
+                "action": "click"
+            }
+        ).count()
+        resp = make_response(json.dumps({"count": count}, default=json_util.default))
+        resp.headers['Content-Type'] = 'application/json'
+        return resp
+    else:
+        return render_template("error.html"), 400
+
+
+@app.route("/worker/daily_registered_visits")
+def worker_daily_registered_visits():
+    worker_id = int(request.args.get("worker_id"))
+    if worker_id:
+        res = list(db.log.aggregate([
+            {
+                "$match":
+                    {
+                        "user_id":
+                            {
+                                "$gt": 0
+                            },
+                        "worker_id": worker_id,
+                        "page_name": "worker",
+                        "action": "page_load"
                     }
             },
             {
