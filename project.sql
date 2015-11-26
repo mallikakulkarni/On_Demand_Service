@@ -126,15 +126,14 @@ create table small_business_review
 		primary key (sm_id, email)
     );
 
-create table small_business_activation
+create table small_business_activation_log
 	(
+		log_id varchar(10),
 		sm_id 			varchar(10),
         name			varchar(10),
         activate		bool,
         date			DATETIME,
-        primary key(sm_id),
-        foreign key (sm_id) references small_business(sm_id)
-			on delete cascade  
+        primary key(log_id)
     );
     
 create table admin
@@ -201,4 +200,20 @@ SET worker_rating = 'AVERAGE';
 	END IF;
 END
 
+DELIMITER //
+CREATE PROCEDURE ActivateBusiness(IN id VARCHAR(10))
+BEGIN
+	UPDATE small_business SET activate = true where sm_id=id;
+    INSERT into small_business_activation_log SELECT sm_id, name, activate, now() as date FROM small_business WHERE sm_id=id;
+END //
 
+DELIMITER;
+
+DELIMITER //
+CREATE PROCEDURE DeactivateBusiness(IN id VARCHAR(10))
+BEGIN
+	UPDATE small_business SET activate = false where sm_id=id;
+    INSERT into small_business_activation_log SELECT sm_id, name, activate, now() as date FROM small_business WHERE sm_id=id;
+END //
+
+DELIMITER;

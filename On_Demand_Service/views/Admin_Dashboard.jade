@@ -12,29 +12,61 @@ html
             div.row
                 h2.text-center Admin Dashboard
             div.row
-                div.col-lg-2.col-md-2
+                div.col-lg-3.col-md-3
                     div.card
                         p.custom-number#tv
                         p.custom-title Total Visitors
-                div.col-lg-2.col-md-2
+                div.col-lg-3.col-md-3
                     div.card
                         p.custom-number#rv
                         p.custom-title Registered Visitors
-                div.col-lg-2.col-md-2
+                div.col-lg-3.col-md-3
                     div.card
                         p.custom-number#vip
-                        p.custom-title Visits per IP
-                div.col-lg-2.col-md-2
+                        p.custom-title Avg visits per IP
+                div.col-lg-3.col-md-3
                     div.card
                         p.custom-number#vpi
-                        p.custom-title Visits per ID
+                        p.custom-title Avg visits per ID
+            div.row
+                div#container1
+            div.row
+                div#container2
+            div.row
+                h4 List of workers
+            table.table.table-striped
+                thead
+                    tr
+                        th Name
+                        th Email
+                        th City
+                        th zip
+                        th mobile
+                        th Action
+                tbody
+                    each business, i in businesses
+                        tr
+                            td #{business.name}
+                            td #{business.email}
+                            td #{business.city}
+                            td #{business.zip}
+                            td #{business.mobile}
+                            case business.activate
+                                when 0: td
+                                            a.activate.btn.btn-primary(data-id=business.sm_id) Activate
+                                when 1: td
+                                            a.deactivate.btn.btn-danger(data-id=business.sm_id) Deactivate
+                                default: td
+                                            a.activate.btn.btn-primary(data-id=business.sm_id) Activate
 
-    h1= title
-    p Welcome #{name},(#{id})
 
-    div(class="dashboard")
-        form(method="post" action = "/admin/signin")
 
-           div(class="")
-               button(type="button", id="activate", class="btn btn-default") Activate
-               button(type="button", id="deactivate", class="btn btn-default") Deactivate
+
+
+
+    script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js", type="text/javascript")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.min.js", type="text/javascript")
+    script(src="/javascripts/bootstrap.min.js", type="text/javascript")
+    script(src="//code.highcharts.com/highcharts.js", type="text/javascript")
+    script(src="//code.highcharts.com/modules/exporting.js", type="text/javascript")
+    script(src="/javascripts/admin.js", type="text/javascript")
