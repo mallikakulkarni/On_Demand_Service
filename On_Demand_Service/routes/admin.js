@@ -25,27 +25,34 @@ router.get('/activate_business/:id', function(req, res){
     var connection = create_Connection();
     connection.query('CALL ActivateBusiness (' + smID + ')', function (err, result) {
         if(err) {
+            console.log(err);
             res.send({done:false});
         }
         else    {
-            res.send({done:false});
+            console.log(result);
+            res.send({done:true});
         }
+    connection.end();
     });
 });
 
 
 router.get('/deactivate_business/:id', function(req, res){
     console.log(req.params.id);
-    connection.query('CALL DeactivateBusiness (' + smID + ')', function (err, result) {
+    var connection = create_Connection();
+    var smID = req.params.id;
+    connection.query('CALL DeactivateBusiness (' + smID + ')', function (err, response) {
         if(err) {
+            console.log(err);
             res.send({done:false});
         }
         else    {
+            console.log(response);
             res.send({done:true});
         }
+    connection.end();
     });
-    var smID = req.params.id;
-    var connection = create_Connection();
+
 });
 
 router.post('/signin', function(req, res){
@@ -70,7 +77,7 @@ function create_Connection() {
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: '',
+        password: 'password',
         database: 'project'
     });
     return connection
@@ -88,7 +95,7 @@ function validate_Admin(admin_Id, password, flag){
         }
         return flag(success)
     });
-
+    connection.end();
 }
 
 function getSmallBusinesses(callback)   {
@@ -102,20 +109,8 @@ function getSmallBusinesses(callback)   {
            callback(rows);
        }
     });
+    connection.end();
 }
 
-function activateBusinessWithID(id, callback)   {
-    var connection = create_Connection();
-    connection.connect();
-    connection.query('CALL GetAllJobs (' + sm_id + ')', function (err, result) {
-      callback();
-    });
-}
-
-function Activate_Small_Business(){
-    var connection = create_Connection();
-    connection.connect();
-
-}
 
 module.exports = router;

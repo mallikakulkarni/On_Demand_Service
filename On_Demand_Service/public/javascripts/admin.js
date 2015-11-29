@@ -1,32 +1,44 @@
 $(document).ready(function(){
-    window.ANALYTICS_BASE_URL = "http://localhost:5000";
-   $('.activate').click(function(e){
-       e.preventDefault();
-       var smID = $(this).data("id");
-       var url = "/admin/activate_business/"+smID;
-       $.ajax({
-           url: url,
-           success: function(d) {
-               if(d.done)   {
-                   $(this).removeClass('activate').addClass('deactivate').removeClass('btn-primary').addClass('btn-danger').html("Deactivate");
-               }
-               else {
-                   //$(this).removeClass('deactivate').addClass('activate').removeClass('btn-danger').addClass('btn-primary').html("Activate");
-               }
-           }
-       });
-   });
+    window.ANALYTICS_BASE_URL = "http://1fc719b9.ngrok.io";
+    $('.activate').click(function(e){
+        e.preventDefault();
+        var smID = $(this).data("id");
+        var btn = $(this);
+        var url = "/admin/activate_business/"+smID;
+        $.ajax({
+            url: url,
+            success: function(d) {
+                if(d.done == true)   {
+                    btn.removeClass('activate');
+                    btn.addClass('deactivate');
+                    btn.removeClass('btn-primary');
+                    btn.addClass('btn-danger');
+                    btn.html("Deactivate");
+                    console.log(btn);
+                }
+                else {
+                    //$(this).removeClass('deactivate').addClass('activate').removeClass('btn-danger').addClass('btn-primary').html("Activate");
+                }
+            }
+        });
+    });
     $('.deactivate').click(function(e){
         e.preventDefault();
         var smID = $(this).data("id");
         var url = "/admin/deactivate_business/"+smID;
+        var btn = $(this);
         $.ajax({
             url: url,
             success: function(d) {
-                if(d.done)   {
-                    $(this).removeClass('deactivate').addClass('activate').removeClass('btn-danger').addClass('btn-primary').html("Activate");
-
+                if(d.done == true)   {
+                    btn.removeClass('deactivate');
+                    btn.addClass('activate');
+                    btn.removeClass('btn-danger')
+                    btn.addClass('btn-primary');
+                    btn.html("Activate");
+                    console.log(btn);
                 }
+
                 else {
                     //$(this).removeClass('activate').addClass('deactivate').removeClass('btn-primary').addClass('btn-danger').html("Deactivate");
                 }
@@ -91,12 +103,12 @@ function drawgraph(elementID, data, title) {
     var categories = [];
     var values = [];
     for(var d in data)  {
-        categories.push(new Date(data[d]._id.date.$date));
+        categories.push(new Date(data[d].id.date.$date));
         values.push(data[d].count);
     }
     $('#'+elementID).highcharts({
         chart:  {
-          type: 'line'
+            type: 'line'
         },
         title: {
             text: title,

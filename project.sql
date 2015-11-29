@@ -125,15 +125,13 @@ create table small_business_review
         name			varchar(30),
 		primary key (sm_id, email)
     );
-
 create table small_business_activation_log
+
 	(
-		log_id varchar(10),
 		sm_id 			varchar(10),
         name			varchar(10),
         activate		bool,
-        date			DATETIME,
-        primary key(log_id)
+        date			DATETIME
     );
     
 create table admin
@@ -143,6 +141,18 @@ create table admin
         last_name 		varchar(10),
         password		varchar(10),
         primary key(admin_id)
+    );
+    
+create table review 
+	(
+		name 			varchar(10),
+        sm_id 			varchar(10),
+        review 			varchar(200),
+        approve_status 	bool NOT NULL DEFAULT false,
+        date     		DATETIME,
+        primary key(name),
+        foreign key (sm_id) references small_business(sm_id)
+    
     );
     
     
@@ -215,5 +225,3 @@ BEGIN
 	UPDATE small_business SET activate = false where sm_id=id;
     INSERT into small_business_activation_log SELECT sm_id, name, activate, now() as date FROM small_business WHERE sm_id=id;
 END //
-
-DELIMITER;
