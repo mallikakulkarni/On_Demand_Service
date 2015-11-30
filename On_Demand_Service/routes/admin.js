@@ -9,12 +9,14 @@ var mysql = require('mysql');
 router.get('/signin', function(req,res){
     var c = req.cookies.loggedInAdminID;
     if (c===undefined)  {
-        res.render('Admin_Signin');
+        res.render('adminSignin');
     }
     else    {
         getSmallBusinesses(function(rows){
-            res.cookie('loggedInAdminID', req.body.admin_id);
-            res.render('Admin_Dashboard',{businesses: rows});
+            res.cookie('loggedInAdminID', req.body.adminID);
+            getServices(function(services){
+                res.render('adminDashboard',{services:services, businesses: rows});
+            });
         });
     }
 });
@@ -22,7 +24,7 @@ router.get('/signin', function(req,res){
 router.get('/activate_business/:id', function(req, res){
     console.log(req.params.id);
     var smID = req.params.id;
-    var connection = create_Connection();
+    var connection = createConnection();
     connection.query('CALL ActivateBusiness (' + smID + ')', function (err, result) {
         if(err) {
             console.log(err);
@@ -39,7 +41,7 @@ router.get('/activate_business/:id', function(req, res){
 
 router.get('/deactivate_business/:id', function(req, res){
     console.log(req.params.id);
-    var connection = create_Connection();
+    var connection = createConnection();
     var smID = req.params.id;
     connection.query('CALL DeactivateBusiness (' + smID + ')', function (err, response) {
         if(err) {
@@ -55,25 +57,58 @@ router.get('/deactivate_business/:id', function(req, res){
 
 });
 
+router.get('/delete_service/:id', function(req, res){
+    var connection = createConnection();
+    var serviceID = req.params.id;
+    connection.query(' CALL DeleteService ('+serviceID+')', function(err, response){
+        if(err){
+            console.log(err);
+            res.send({done:false});
+        }
+        else{
+            res.send({done:true});
+        }
+    });
+});
+
+router.get('/add_service/:service_name', function(req, res){
+    var connection = createConnection();
+    var service_name = req.params.service_name;
+    var service_id = Math.floor(Math.random() * 100000) + 1;
+    console.log(service_name);
+    connection.query(' INSERT into service VALUES("'+service_id+'", "'+service_name+'")', function(err, response){
+
+        if(err){
+            console.log(err);
+            res.send({done:false});
+        }
+        else{
+            res.send({done:true});
+        }
+    });
+});
+
 router.post('/signin', function(req, res){
-    validate_Admin(req.body.admin_id, req.body.password, function(response){
+    validate_Admin(req.body.adminID, req.body.password, function(response){
         console.log(req.body);
-        console.log(req.body.admin_id);
+        console.log(req.body.adminID);
         console.log(req.body.password);
 
         if (response === null){
-            res.render('Admin_Signin',{message:'Incorrect credentials'});
+            res.render('adminSignin',{message:'Incorrect credentials'});
         }
         else    {
             getSmallBusinesses(function(rows){
-                res.cookie('loggedInAdminID', req.body.admin_id);
-                res.render('Admin_Dashboard',{name:response.first_name, id: response.admin_id, businesses: rows});
+                res.cookie('loggedInAdminID', req.body.adminID);
+                getServices(function(services){
+                    res.render('adminDashboard',{services:services, businesses: rows});
+                });
             });
         }
     })
 });
 
-function create_Connection() {
+function createConnection() {
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -83,11 +118,11 @@ function create_Connection() {
     return connection
 }
 
-function validate_Admin(admin_Id, password, flag){
+function validate_Admin(adminID, password, flag){
     var success = null;
-    var connection = create_Connection();
+    var connection = createConnection();
     connection.connect();
-    connection.query('SELECT * from admin WHERE admin_id="'+admin_Id+'" AND password ="'+password+'"', function(err, rows){
+    connection.query('SELECT * from admin WHERE admin_id="'+adminID+'" AND password ="'+password+'"', function(err, rows){
         if(err) throw err;
         if(rows.length === 1) {
             success = rows[0];
@@ -99,7 +134,7 @@ function validate_Admin(admin_Id, password, flag){
 }
 
 function getSmallBusinesses(callback)   {
-    var connection = create_Connection();
+    var connection = createConnection();
     connection.connect();
     connection.query('select * from small_business', function(err, rows){
        if(err)  {
@@ -108,6 +143,21 @@ function getSmallBusinesses(callback)   {
         else    {
            callback(rows);
        }
+    });
+    connection.end();
+}
+
+function getServices(callback)   {
+    var connection = createConnection();
+    connection.connect();
+    connection.query('select * from service', function(err, rows){
+        if(err)  {
+            console.log(err);
+            throw err;
+        }
+        else    {
+            callback(rows);
+        }
     });
     connection.end();
 }

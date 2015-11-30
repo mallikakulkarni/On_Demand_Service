@@ -49,9 +49,9 @@ create table schedule
     );
 create table service
 	(
-		service_id		varchar(10),
+        service_id 		varchar(10),
         name			varchar(20),
-        primary key (service_id)
+        primary key(service_id)
     );
 create table worker_availability
 	(
@@ -143,7 +143,7 @@ create table admin
         primary key(admin_id)
     );
     
-create table review 
+create table review_log 
 	(
 		name 			varchar(10),
         sm_id 			varchar(10),
@@ -207,21 +207,43 @@ SET worker_rating = 'EXCELLENT';
 SET worker_rating = 'GOOD';
 	ELSEIF (avg_rating <= 3) THEN
 SET worker_rating = 'AVERAGE';
-	END IF;
+	
+    END IF;
+    
 END
 
 DELIMITER //
 CREATE PROCEDURE ActivateBusiness(IN id VARCHAR(10))
-BEGIN
-	UPDATE small_business SET activate = true where sm_id=id;
-    INSERT into small_business_activation_log SELECT sm_id, name, activate, now() as date FROM small_business WHERE sm_id=id;
-END //
 
-DELIMITER;
+BEGIN
+	
+    UPDATE small_business SET activate = true where sm_id=id;
+    INSERT into small_business_activation_log SELECT sm_id, name, activate, now() as date FROM small_business WHERE sm_id=id;
+
+END //
+DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE DeactivateBusiness(IN id VARCHAR(10))
+
 BEGIN
+
 	UPDATE small_business SET activate = false where sm_id=id;
     INSERT into small_business_activation_log SELECT sm_id, name, activate, now() as date FROM small_business WHERE sm_id=id;
+
 END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteService(IN serviceid VARCHAR(10))
+
+BEGIN
+
+	IF NOT EXISTS (SELECT service_id from service where service_id = serviceid) THEN	
+	
+			DELETE FROM service WHERE service_id = serviceid;
+            
+	END IF;
+    
+END //
+DELIMITER ;

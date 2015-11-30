@@ -45,6 +45,35 @@ $(document).ready(function(){
             }
         });
     });
+    $('.delete').click(function(e){
+        e.preventDefault();
+        var serviceID = $(this).data("id");
+        var url = "/admin/delete_service/"+serviceID;
+        var btn = $(this);
+        $.ajax({
+            url: url,
+            success: function(d){
+                if(d.done == true){
+                    btn.parent().parent().css('text-decoration', 'line-through').css('color', 'red');
+                }
+            }
+        });
+
+    });
+    $('.add').click(function(e){
+        e.preventDefault();
+        var serviceName = document.getElementById("service_name").value;
+        console.log(serviceName);
+        var url = "/admin/add_service/"+serviceName;
+        $.ajax({
+            url: url,
+            success: function(d){
+                if(d.done == true){
+                    alert("Service added!");
+                }
+            }
+        });
+    });
     var numbersToUpdate = [
         {
             elementID: "tv",
