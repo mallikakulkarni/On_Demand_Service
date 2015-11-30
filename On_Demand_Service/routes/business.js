@@ -62,19 +62,23 @@ router.get('/getInitialContractorList', function(req, res) {
     });
 });
 
-function createConnection() {
-    var connection = mysql.createConnection({
-        host     : 'localhost',
-        user     : 'root',
-        password : 'newpwd',
-        port     :  3306,
-        database : 'project',
-        useTransaction: {
-            connectionLimit: 10
-        }
+router.get('/getBookingContractorList', function(req, res) {
+    console.log('Here');
+    getClauseForContractorDetails(req.query.service, req.query.city, function(clause) {
+        console.log(clause);
+        getContractorCount(clause, req.query.city, req.query.service, function(countcity){
+            var city = countcity.city === '' ? 'All Cities' : countcity.city;
+            var service = getServiceId(req.query.service, function(service) {
+                getContractorListForBooking(clause,service.service_id, 1, 5, function(results) {
+                    console.log(results);
+                    res.send({results: results});
+                });
+            });
+        });
     });
-    return connection
-}
+});
+
+
 
 function checkBusinessExists(email, cb) {
     var exists = null;
@@ -135,7 +139,7 @@ function getAllJobs(sm_id, cb) {
     });
 }
 
-function getContractorCount(clause, city, cb) {
+function getContractorCount(clause, city, service,  cb) {
     var connection = createConnection();
     connection.connect();
     var query = 'Select count(*) as count from small_business'+clause;
@@ -162,6 +166,48 @@ function getContractorList(clause, rownumvar, numberrows, cb) {
             return cb(modContractors);
         });
     });
+
+}
+
+function getContractorListForBooking(clause, service, rownumvar, numberrows, cb) {
+    var rowoffset = (rownumvar - 1);
+    var rownumclause = " LIMIT "+rowoffset+","+numberrows;
+    var query = "Select sm_id, name FROM small_business"+clause+rownumclause;
+    console.log(query);
+    var connection = createConnection();
+    connection.connect();
+    connection.query(query, function(err, contractors) {
+        if (err) throw err;
+        for (i = 0; i < contractors.length; i++) {
+            contractors[i].service = service;
+            console.log(contractors[i]);
+        }
+        async.map(contractors, getBookedSlots, function(err, modContractors) {
+            if (err) throw err;
+            return cb(modContractors);
+        });
+    });
+
+}
+
+function getBookedSlots(contractor, cb) {
+    var connection = createConnection();
+    connection.connect();
+    var tomorrow = 1;
+    var nextweekdate = 7;
+    console.log(tomorrow);
+    console.log(nextweekdate);
+    var query = "select * from schedule where slot_id in (select slot_id from worker_availability where sm_id = '"+contractor.sm_id+"'" +
+        " AND worker_id in (select worker_id from service_provider where sm_id = '"+contractor.sm_id+"' AND service_id = '"+contractor.service+"') " +
+        "having count(worker_id) = (select count(worker_id) from service_provider where sm_id = '"+contractor.sm_id+"' " +
+        "AND service_id = '"+contractor.service+"')) AND slot_id in (select slot_id from schedule where date between NOW()+1 AND NOW()+7)";
+    console.log(query);
+    connection.query(query, function(err, dates) {
+        if (err) throw err;
+        contractor.dates = dates;
+        return cb(null, contractor);
+    });
+
 
 }
 
@@ -205,5 +251,28 @@ function getClauseForContractorDetails(service, city, cb) {
     }
 }
 
+function getServiceId(service, cb) {
+    var connection = createConnection();
+    connection.connect();
+    var query = "select service_id from service where name = '"+service+"'";
+    connection.query(query, function(err, result) {
+        if (err) throw err;
+        connection.end();
+        return cb(result[0])
+    })
+}
 
+function createConnection() {
+    var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        password : 'newpwd',
+        port     :  3306,
+        database : 'project',
+        useTransaction: {
+            connectionLimit: 10
+        }
+    });
+    return connection
+}
 module.exports = router;

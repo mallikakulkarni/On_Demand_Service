@@ -27,8 +27,17 @@ insert into schedule values ('1', now(), 'Saturday', 0800, 1159);
 insert into schedule values ('2', now(), 'Saturday', 1200, 1559);
 insert into schedule values ('3', now(), 'Saturday', 1600, 1959);
 insert into schedule values ('4', now(), 'Saturday', 2000, 2359);
+insert into schedule values ('5', now()+2, 'Saturday', 2000, 2359);
 
+select * from schedule where slot_id in (select slot_id from worker_availability where sm_id = '58934997' AND slot_id in (select slot_id from schedule where date between now()+1 AND now()+7));
+
+insert into worker_availability values ('123456', '58934997', '1', '5');
+insert into worker_availability values ('900', '58934997', '2', '2');
+
+drop table worker_availability;
 insert into worker values ('123456', '58934997', 'secret', 'John Deer');
+insert into worker values ('900', '58934997', 'secret', 'Bill Weasley');
+insert into service_provider values ('900', '58934997', '2');
 
 insert into service_record values ('1', '123456', '58934997', '1', '1', 's@g.com', 'PENDING', null);
 insert into service_record values ('2', '123456', '58934997', '2', '1', 's@g.com', 'PENDING', 1);
@@ -61,5 +70,21 @@ update service_record set rating = NULL where service_status != 'PENDING';
 select * from service_record_public where status != 'PENDING' AND rating IS NULL AND customer = "s@g.com";
 
 
+select * 
+from schedule 
+where slot_id in 
+	(select slot_id from worker_availability where sm_id = '58934997' AND worker_id in 
+    (select worker_id from service_provider where sm_id = '58934997' AND service_id = '1'
+	having count(worker_id) = (select count(worker_id) from service_provider where sm_id = '58934997' AND service_id = '1')))
+    AND slot_id in (select slot_id from schedule where date between NOW()+1 AND NOW()+7);
 
+
+select worker_id from worker_availability where worker_id in
+(select worker_id from service_provider where sm_id = '58934997' AND service_id = '2' )
+having count(worker_id) = (select count(worker_id) from service_provider where sm_id = '58934997' AND service_id = '2');
+
+
+select count(worker_id) from service_provider where sm_id = '58934997' AND service_id = '2';
+
+select distinct sm_id from service_provider where service_id = (select service_id from service where name = "Nanny Services");
 

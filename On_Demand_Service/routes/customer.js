@@ -17,7 +17,7 @@ router.post('/login', function(req, res) {
             res.render('customersignup');
         } else {
             if (result.correctlogin === true) {
-                res.render('customerhomepage', {name: result.name, email: result.email});
+                res.render('customerhomepage', {name: result.name, email: result.email, city: result.city});
             } else {
                 res.render('incorrectcustomerlogin');
             }
@@ -85,7 +85,7 @@ function validatelogin(email, password, cb) {
         } else {
             var correctlogin = password === result[0].password ? true : false;
             if (correctlogin === true) {
-                return cb({exists: true, correctlogin: correctlogin, name: result[0].name, email: result[0].email});
+                return cb({exists: true, correctlogin: correctlogin, name: result[0].name, email: result[0].email, city: result[0].city});
             } else {
                 return cb({exists: true, correctlogin: correctlogin});
             }
