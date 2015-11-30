@@ -14,6 +14,7 @@ html
     link(href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic", rel="stylesheet", type="text/css")
     script(type="text/javascript", src="/javascripts/jquery.js")
     script(type="text/javascript", src="/javascripts/bootstrap.min.js")
+
   body
     div(class="brand") Business Casual
     div(class="address-bar") 1 Washington Square | San Jose, CA | 123.456.7890
@@ -34,8 +35,8 @@ html
                     a(href="#") About
                 li
                     a(href="#") Contact
-                li
-                    a(data-toggle="modal", data-target="#recloginmodal") Log in
+                li(id="childa")
+                    a(data-toggle="modal", data-target="#recloginmodal", id="custlogin") Log in
     div(class="modal fade", id="recloginmodal", tabindex="-1", role="dialog", aria-labelledby="recloginLabel")
       div(class="modal-dialog", role="document")
           div(class="modal-content")
@@ -44,20 +45,20 @@ html
                       span(aria-hidden="true") &times;
                   h4(class="modal-title", id="recloginLabel") Log In
               div(class="modal-body")
-                  form(role="form")
+                  form(role="form", id="loginmodalform", action='/customer/login', method='POST')
                       div(class="row")
                           div(class="form-group col-lg-4")
                               label Email
-                              input(type="email", class="form-control", placeholder="email")
+                              input(type="email", class="form-control", placeholder="email", name="email", id="customeremail")
                       div(class="row")
                           div(class="form-group col-lg-4")
                               label Password
-                              input(type="password", class="form-control", placeholder="Password")
-              div(class="modal-footer")
-                  button(type="submit", class="btn btn-default", data-dismiss="modal") Submit
-                  button(type="button", class="btn btn-default", data-dismiss="modal") Reset
-                  hr
-                  p Don't have an Account?&nbsp
+                              input(type="password", class="form-control", placeholder="Password", name="password", id="customerpass")
+                      div(class="modal-footer")
+                          button(type="submit", id="customerloginsubmit" class="btn btn-default") Submit
+                          button(type="button", class="btn btn-default", data-dismiss="modal") Reset
+                          hr
+                          p Don't have an Account?&nbsp
                       a(data-toggle="modal", data-target="#recsignupmodal", id="signuplink", class="close", data-dismiss="modal") Sign up!
     div(class="modal fade", id="recsignupmodal", tabindex="-1", role="dialog", aria-labelledby="recsignupLabel")
       div(class="modal-dialog", role="document")
@@ -118,4 +119,19 @@ html
               div(class="modal-footer")
                   button(type="submit", class="btn btn-default", data-dismiss="modal") Submit
                   button(type="button", class="btn btn-default", data-dismiss="modal") Reset
-    block content
+  script(type="text/javascript").
+      $(document).ready(function() {
+          $("#customerloginsubmit").click(function() {
+              var email = document.getElementById('customeremail').value;
+              var password = document.getElementById('customerpass').value;
+              sessionStorage.setItem("customerEmail", email);
+              sessionStorage.setItem("customerPass", password);
+              ("#childa").html('<a href="/" id="custlogout">Log Out</a>');
+          });
+          $("#customerlogout").click(function() {
+              sessionStorage.removeItem("customerEmail");
+              sessionStorage.removeItem("customerPass");
+              ("#childa").html('<a data-toggle="modal" data-target="#recloginmodal" id="custlogin">Log In</a>');
+          });
+      });
+  block content

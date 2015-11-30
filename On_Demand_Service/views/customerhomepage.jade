@@ -1,0 +1,110 @@
+//
+   Created by mallika on 11/29/15.
+
+extends layout
+
+block content
+    div(class="row")
+        div(class="box")
+            div(class="col-lg-12 text-center")
+                h4(class="intro-text text-center") Welcome&nbsp
+                    strong!= name
+                hr
+    div(class="row")
+        div(class="box")
+            div(class="col-lg-12 text-center")
+                h4(class="intro-text", id="rateJobs") RATE your jobs
+                hr
+
+                hr
+    script(type="text/javascript").
+        $(document).ready(function() {
+            rateJobs();
+            function rateJobs() {
+                var email = !{JSON.stringify(email)}
+                console.log(email);
+                var rateRecords;
+                $.ajax({
+                    url:'/customer/rateJobs',
+                    type:'GET',
+                    data: {email: email},
+                    success: function(result) {
+                        rateRecords = result;
+                        for (i = 0; i < result.length; i++) {
+                            console.log(result[i]);
+                            var number = document.createElement('h4');
+                            var rec = document.createTextNode("RECORD "+(i+1));
+                            number.appendChild(rec);
+                            var business = document.createElement('h5');
+                            var bus = document.createTextNode("BUSINESS: Email: "+result[i].Business_email+ ", Name: "+result[i].Business);
+                            business.appendChild(bus);
+                            var worker = document.createElement('h5');
+                            var workerdet = document.createTextNode("WORKMAN: "+result[i].Worker);
+                            worker.appendChild(workerdet);
+                            var date = document.createElement('h5');
+                            var datestr = document.createTextNode("Date: "+result[i].Date);
+                            date.appendChild(datestr);
+                            var ratestr = document.createElement('h5');
+                            var ratetext = document.createTextNode("Rate - Lowest to hightest from Left to Right");
+                            ratestr.appendChild(ratetext);
+                            var radios = document.createElement('form');
+                            radios.id = "form"+i;
+                            radios.name = result[i].record_id;
+                            radios.className='ratingForm';
+                            for (j = 1; j <= 5; j++) {
+                                var label = document.createElement('label');
+                                label.appendChild(document.createTextNode(j));
+                                var rate = document.createElement('input');
+                                rate.type = 'radio';
+                                rate.name = 'rating1';
+                                rate.value = j;
+                                rate.id = "input"+j;
+                                radios.appendChild(label);
+                                radios.appendChild(rate);
+                            }
+                            radios.methd='POST';
+                            radios.action='/index';
+                            var submit = document.createElement('button');
+                            submit.type = 'submit';
+                            submit.id = 'submit'+i;
+                            submit.className = 'submitForm';
+                            submit.value = result[i].record_id;
+                            submit.appendChild(document.createTextNode("Submit"));
+                            radios.appendChild(submit);
+                            var rateJobs = document.getElementById('rateJobs');
+                            rateJobs.appendChild(number);
+                            rateJobs.appendChild(business);
+                            rateJobs.appendChild(worker);
+                            rateJobs.appendChild(date);
+                            rateJobs.appendChild(ratestr);
+                            rateJobs.appendChild(radios);
+                        }
+                    }
+                });
+            }
+            $("body").on('submit', '.ratingForm', (function(e) {
+                e.preventDefault();
+                console.log($(this));
+                var radios = $(this).find("input");
+                console.log(radios);
+                var val;
+                for (i = 0; i < 5; i++) {
+                    if ( radios[i].checked ) {
+                        val = radios[i].value;
+                        break;
+                    }
+                }
+                var record_id = $(this).attr('name');
+                console.log(record_id);
+                console.log(val);
+                $.ajax({
+                    url:'/customer/rate',
+                    type:'POST',
+                    data: {val: val, record_id: record_id},
+                    success: function(result) {
+                        console.log(result);
+                        location.reload();
+                    }
+                });
+            }));
+        });

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-
+var async = require("async");
 
 
 /* GET home page. */
@@ -41,6 +41,24 @@ router.get('/pendingjobs', function(req, res) {
 router.get('/alljobs', function(req, res) {
     getAllJobs(req.query.sm_id, function (results) {
         res.send(results[0]);
+    });
+});
+
+router.get('/browsecontractors', function(req, res) {
+    res.render('browsecontractors');
+
+});
+
+router.get('/getInitialContractorList', function(req, res) {
+    getClauseForContractorDetails(req.query.service, req.query.city, function(clause) {
+        console.log(clause);
+        getContractorCount(clause, req.query.city, function(countcity){
+            var city = countcity.city === '' ? 'All Cities' : countcity.city;
+            getContractorList(clause, 1, 5, function(results) {
+                var message = countcity.count === 0 ? "No Records present for City "+city : "Displaying Records for "+city;
+                res.send({results: results, count: countcity.count, message: message});
+            });
+        });
     });
 });
 
@@ -115,6 +133,76 @@ function getAllJobs(sm_id, cb) {
         connection.end();
         return cb(result);
     });
+}
+
+function getContractorCount(clause, city, cb) {
+    var connection = createConnection();
+    connection.connect();
+    var query = 'Select count(*) as count from small_business'+clause;
+    console.log(query);
+    connection.query(query, function(err, count) {
+        if (err) throw err;
+        connection.end();
+        var obj = {count: count[0].count, city: city}
+        return cb(obj);
+    });
+}
+
+function getContractorList(clause, rownumvar, numberrows, cb) {
+    var rowoffset = (rownumvar - 1);
+    var rownumclause = " LIMIT "+rowoffset+","+numberrows;
+    var query = "SELECT sm_id, name, email, mobile, street_address, city, state, zip FROM small_business"+clause+rownumclause;
+    console.log(query);
+    var connection = createConnection();
+    connection.connect();
+    connection.query(query, function(err, contractors) {
+        if (err) throw err;
+        async.map(contractors, getServices, function(err, modContractors) {
+            if (err) throw err;
+            return cb(modContractors);
+        });
+    });
+
+}
+
+function getServices(contractor, cb) {
+    var connection = createConnection();
+    connection.connect();
+    connection.query('select name from service where service_id in (select distinct service_id ' +
+    'from service_provider where sm_id = "'+contractor.sm_id+'")', function(err, services) {
+        if (err) throw err;
+        console.log(services);
+        contractor.services = services;
+        delete contractor.sm_id;
+        return cb(null, contractor);
+    });
+}
+
+function getClauseForContractorDetails(service, city, cb) {
+    var clause = city === "" ? "" : " WHERE city = '"+city+"'";
+    if (service !== "") {
+        var connection = createConnection();
+        connection.connect();
+        connection.query('select distinct sm_id from service_provider where service_id = ' +
+        '(select service_id from service where name = "' + service + '")', function (err, result) {
+            if (err) throw err;
+            if (result.length > 0) {
+                clause += clause === "" ? " WHERE " : " AND ";
+                clause += "sm_id IN (";
+                for (i = 0; i < result.length; i++) {
+                    clause += "'" + result[i].sm_id + "'";
+                    if (i < result.length - 1) {
+                        clause += ", ";
+                    }
+                }
+                clause += ")";
+            }
+            console.log('clause');
+            console.log(clause);
+            return cb(clause);
+        });
+
+    }
 }
 
 
