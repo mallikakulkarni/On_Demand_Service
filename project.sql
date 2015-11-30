@@ -51,19 +51,20 @@ create table service
 	(
         service_id 		varchar(10),
         name			varchar(20),
+        description     varchar(40),
         primary key(service_id)
     );
 create table worker_availability
 	(
 		worker_id		varchar(10),
         sm_id			varchar(10),
-        slot_id			varchar(10),
-        primary key (sm_id, worker_id, slot_id),
+        service_id			varchar(10),
+        primary key (sm_id, worker_id, service_id),
         foreign key (sm_id) references small_business(sm_id)
 			on delete cascade,
 		foreign key (worker_id) references worker(worker_id)
 			on delete cascade,
-		foreign key (slot_id) references schedule(slot_id)
+		foreign key (service_id) references schedule(service_id)
 			on delete cascade
     );
 create table service_record
@@ -76,6 +77,7 @@ create table service_record
         service_recipient	varchar(40),
         service_status		varchar(10),
         rating				int(1),
+        admin_review		boolean default false,
         primary key (record_id),
         foreign key (sm_id) references small_business(sm_id),
         foreign key (worker_id) references worker(worker_id),
@@ -86,15 +88,14 @@ create table service_record
 create table service_provider
 	(
 		worker_id			varchar(10),
-		slot_id				varchar(10),
         sm_id				varchar(10),
         service_id			varchar(10),
-        primary key (sm_id, worker_id, slot_id),
+        primary key (sm_id, worker_id, service_id),
         foreign key (sm_id) references small_business(sm_id)
 			on delete cascade,
 		foreign key (worker_id) references worker(worker_id)
 			on delete cascade,
-		foreign key (slot_id) references service(service_id)
+		foreign key (service_id) references service(service_id)
 			on delete cascade
     );
     
@@ -143,6 +144,11 @@ create table admin
         primary key(admin_id)
     );
     
+
+CREATE VIEW CONTRACTOR_LIST AS
+	SELECT name, email, mobile, street_address, city, state, zip
+    FROM small_business;
+
 create table review_log 
 	(
 		name 			varchar(10),
@@ -154,6 +160,7 @@ create table review_log
         foreign key (sm_id) references small_business(sm_id)
     
     );
+
     
     
 CREATE VIEW customer_public AS
@@ -162,8 +169,10 @@ CREATE VIEW customer_public AS
 
 create or replace view service_public as (select name, description from service);
 
-create or replace view contractor_details as (select )
-
+create or replace view service_record_public as 
+select rec.record_id, worker.name as Worker, sm.name as Business, sm.email as Business_email, slot.date as Date, service.name as Service, rec.service_status as Status, rec.rating as Rating, rec.service_recipient as customer
+from worker worker, schedule slot, small_business sm, service service, service_record rec
+where rec.worker_id = worker.worker_id AND rec.slot_id = slot.slot_id AND rec.sm_id = sm.sm_id AND rec.service_id = service.service_id;
 
 
 DELIMITER '$';
@@ -247,3 +256,4 @@ BEGIN
     
 END //
 DELIMITER ;
+

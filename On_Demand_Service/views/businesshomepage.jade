@@ -134,14 +134,10 @@ block content
 
             });
             $("#workersignupform").submit(function(e) {
-                console.log('Here');
                 var formValues = ['workername', 'workerpassword'];
                 var objValues = ['name', 'password'];
                 var reqObj = {};
                 for (i = 0; i < formValues.length; i++) {
-                    console.log(formValues[i]);
-                    console.log(document.getElementById(formValues[i]));
-                    console.log(document.getElementById(formValues[i]).value);
                     reqObj[objValues[i]] = document.getElementById(formValues[i]).value;
                 }
                 workerObj = reqObj;

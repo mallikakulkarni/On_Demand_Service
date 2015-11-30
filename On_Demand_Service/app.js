@@ -13,9 +13,6 @@ var customer = require('./routes/customer');
 var services = require('./routes/services');
 var admin = require('./routes/admin');
 var app = express();
-app.set('port', 3000);
-app.listen(app.get('port'));
-console.log('Express server listening on port ' + app.get('port'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

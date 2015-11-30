@@ -3,7 +3,7 @@ var router = express.Router();
 var mysql = require('mysql');
 
 /* GET home page. */
-router.get('/browse', function(req, res, next) {
+router.get('/browseservices', function(req, res, next) {
     getAllServices(function(services) {
         res.render('services', {services: services});
     });

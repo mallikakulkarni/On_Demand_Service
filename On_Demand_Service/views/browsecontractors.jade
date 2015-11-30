@@ -1,0 +1,83 @@
+//
+   Created by mallika on 11/27/15.
+
+extends layout
+
+block content
+    div(class="row")
+        div(class="box")
+            div(class="col-lg-12")
+                hr
+                h2(class="intro-text text-center") BROWSE
+                    strong form
+                hr
+                form(role="form", id="browsecontractorsform")
+                    div(lass="row")
+                        div(class="form-group col-lg-4")
+                            label Service
+                            input(list="services", name="service", id="selservice")
+                            datalist(id="services")
+                                option(value="Cleaning")
+                                option(value="Nanny Services")
+                        div(class="form-group col-lg-4")
+                            label City
+                            input(list="citylist", name="selectcity", id="selcity")
+                            datalist(id="citylist")
+                                option(value="San Jose")
+                                option(value="Sunnyvale")
+                        div(class="form-group col-lg-4")
+                            button(type="submit", class="btn btn-default") Submit
+                            button(type="reset", class="btn btn-default") Reset
+    div(class="container")
+        div(class="row")
+            div(class="box", id="contractordiv")
+    script(type="text/javascript").
+        $(document).ready(function() {
+            var numberRecs;
+            $("#browsecontractorsform").submit(function(e) {
+                e.preventDefault();
+                var obj = {};
+                obj.service = $("#selservice").val();
+                obj.city = $("#selcity").val();
+                $.ajax({
+                    url: '/business/getInitialContractorList',
+                    type: 'GET',
+                    data: obj,
+                    success: function(results) {
+                        $("#contractordiv").empty();
+                        var message = document.createElement("h3");
+                        message.appendChild(document.createTextNode(results.message));
+                        document.getElementById("contractordiv").appendChild(message);
+                        numberRecs = results;
+                        var len = results.count > 5 ? 5 : results.count;
+                        for(i = 0; i < len; i++) {
+                            var conObj = results.results[i];
+                            var contentbox = document.createElement("div");
+                            contentbox.className = "col-lg-12";
+                            var name = document.createElement("h4");
+                            name.appendChild(document.createTextNode("Name: "+conObj.name));
+                            var email = document.createElement("h5");
+                            email.appendChild(document.createTextNode("Email: "+conObj.email));
+                            var phone = document.createElement("h5");
+                            phone.appendChild(document.createTextNode("Contact Number: "+conObj.mobile));
+                            var address = document.createElement("h5");
+                            address.appendChild(document.createTextNode("Address: "+conObj.street_address+" "+conObj.city+", "+conObj.state+", "+conObj.zip));
+                            var servicesText = "Services: ";
+                            for (j = 0; j < conObj.services.length; j++) {
+                                console.log(conObj.services[j]);
+                                servicesText += conObj.services[j].name;
+                                servicesText += j < conObj.services.length - 1 ? ", " : "";
+                            }
+                            var services = document.createElement("h5");
+                            services.appendChild(document.createTextNode(servicesText));
+                            contentbox.appendChild(name);
+                            contentbox.appendChild(email);
+                            contentbox.appendChild(phone);
+                            contentbox.appendChild(address);
+                            contentbox.appendChild(services);
+                            document.getElementById("contractordiv").appendChild(contentbox);
+                        }
+                    }
+                });
+            })
+        })
