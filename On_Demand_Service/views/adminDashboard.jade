@@ -33,7 +33,7 @@ html
             div.row
                 div#container2
             div.row
-                h4 List of workers
+                h4 Activate/Deactivate Small Businesses
             table.table.table-striped
                 thead
                     tr
@@ -58,6 +58,24 @@ html
                                             a.deactivate.btn.btn-danger(data-id=business.sm_id) Deactivate
                                 default: td
                                             a.activate.btn.btn-primary(data-id=business.sm_id) Activate
+            div.row
+                h4 Add/Delete Services
+            table.table.table-striped
+                thead
+                    tr
+                        th Service Names
+                tbody
+                    each service,i in services
+                        tr
+                            td #{service.name}
+                            td
+                                a.delete.btn.btn-danger(data-id=service.service_id) Delete
+
+            div.row
+                input(type="text" name="service_name" id="service_name" placeholder="Enter a service")
+                a.add.btn.btn-primary(data-id=service_name) Add
+
+
 
 
 
