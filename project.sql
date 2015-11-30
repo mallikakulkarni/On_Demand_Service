@@ -58,13 +58,16 @@ create table worker_availability
 	(
 		worker_id		varchar(10),
         sm_id			varchar(10),
-        service_id			varchar(10),
-        primary key (sm_id, worker_id, service_id),
+        service_id		varchar(10),
+        slot_id			varchar(10),
+        primary key (sm_id, worker_id, service_id, slot_id),
         foreign key (sm_id) references small_business(sm_id)
 			on delete cascade,
 		foreign key (worker_id) references worker(worker_id)
 			on delete cascade,
 		foreign key (service_id) references service(service_id)
+			on delete cascade,
+		foreign key (slot_id) references schedule(slot_id)
 			on delete cascade
     );
 create table service_record
