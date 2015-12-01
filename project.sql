@@ -135,7 +135,7 @@ create table small_business_activation_log
 		sm_id 			varchar(10),
         name			varchar(10),
         activate		bool,
-        date			DATETIME
+        date			DATE
     );
     
 create table admin

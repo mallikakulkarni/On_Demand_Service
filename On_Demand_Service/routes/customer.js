@@ -4,7 +4,6 @@ var mysql = require('mysql');
 
 /* GET home page. */
 router.get('/getPublicData', function(req, res, next) {
-    console.log(req.query.record_id);
     getCustomerPublicView(req.query.record_id, function(result) {
         res.send(result);
     });
@@ -12,7 +11,6 @@ router.get('/getPublicData', function(req, res, next) {
 
 router.post('/login', function(req, res) {
     validatelogin(req.body.email, req.body.password, function(result) {
-        console.log(result);
         if (result.exists === false) {
             res.render('customersignup');
         } else {
@@ -26,8 +24,6 @@ router.post('/login', function(req, res) {
 });
 
 router.post('/rate', function(req, res) {
-    console.log('Here');
-    console.log(req.body);
     insertRating(req.body.record_id, req.body.val, function(message) {
         if (message === true) {
             res.send({message : "Rating inserted"})
@@ -46,7 +42,6 @@ function insertRating (record_id, rating, cb) {
     var connection = createConnection();
     connection.connect();
     var query = 'update service_record set rating = '+rating+' where record_id = "'+record_id+'"';
-    console.log(query);
     connection.query(query, function(err, result) {
         if (err) throw err;
         console.log(result);
@@ -71,15 +66,12 @@ function rateJobs(email, cb) {
 
 
 function validatelogin(email, password, cb) {
-    console.log(email);
-    console.log(password);
     var connection = createConnection();
     connection.connect();
     var query = 'select * from service_recipient where email = "'+email+'"';
     console.log(query);
     connection.query(query, function(err, result) {
         if (err) throw err;
-        console.log(result);
         if (result.length === 0) {
             return cb({exists: false});
         } else {

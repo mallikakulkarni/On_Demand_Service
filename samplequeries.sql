@@ -32,7 +32,7 @@ insert into schedule values ('5', now()+2, 'Saturday', 2000, 2359);
 select * from schedule where slot_id in (select slot_id from worker_availability where sm_id = '58934997' AND slot_id in (select slot_id from schedule where date between now()+1 AND now()+7));
 
 insert into worker_availability values ('123456', '58934997', '1', '5');
-insert into worker_availability values ('900', '58934997', '2', '2');
+insert into worker_availability values ('900', '58934997', '2', '5');
 
 drop table worker_availability;
 insert into worker values ('123456', '58934997', 'secret', 'John Deer');
@@ -88,3 +88,22 @@ select count(worker_id) from service_provider where sm_id = '58934997' AND servi
 
 select distinct sm_id from service_provider where service_id = (select service_id from service where name = "Nanny Services");
 
+select * from schedule;
+
+
+select * from worker where worker_id in 
+	(select worker_id from service_provider 
+	where sm_id = '58934997' AND 
+    service_id = (select service_id from service where name = 'Cleaning'))
+    AND NOT EXISTS 
+		(select * from worker_availability 
+		where sm_id = '58934997' AND slot_id in (select slot_id from schedule where date = STR_TO_DATE('11/30/2015', '%m/%d/%Y') AND begin_time = 2000 AND end_time = 2359) AND worker_id = worker.worker_id);
+
+select slot_id from schedule where date = STR_TO_DATE('11/30/2015', '%m/%d/%Y') AND begin_time = 2000 AND end_time = 2359;
+
+select now() from small_business;
+
+update schedule set date = now() where slot_id = '5';
+
+
+select * from schedule;

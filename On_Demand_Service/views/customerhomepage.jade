@@ -26,16 +26,29 @@ block content
                     div(lass="row")
                         div(class="form-group col-lg-4")
                             label Service
-                            input(list="services", name="service", id="selservice")
+                            input(list="services", name="service", id="selservice", required="true")
                             datalist(id="services")
                                 option(value="Cleaning")
                                 option(value="Nanny Services")
-                    div(class="form-group col-lg-4")
-                        label City
-                        input(list="citylist", name="selectcity", id="selcity")
-                        datalist(id="citylist")
-                            option(value="San Jose")
-                            option(value="Sunnyvale")
+                        div(class="form-group col-lg-4")
+                            label City
+                            input(list="citylist", name="selectcity", id="selcity", required="true")
+                            datalist(id="citylist")
+                                option(value="San Jose")
+                                option(value="Sunnyvale")
+
+                        div(class="form-group col-lg-4 date", id="datetimepicker1")
+                            label Date
+                            input(type="text", name="datepicker", id="datepicker", required="true")
+
+                        div(class="form-group col-lg-4")
+                            label Slot
+                            input(list="slots", name="slotpicker", id="slotpicker", required="true")
+                            datalist(id="slots")
+                                option(value="8:00 AM to 12 Noon")
+                                option(value="12 Noon to 4 PM")
+                                option(value="4 PM to 12 8PM")
+
                     div(class="form-group col-lg-4")
                         button(type="submit", class="btn btn-default") Submit
                         button(type="reset", class="btn btn-default") Reset
@@ -44,30 +57,96 @@ block content
                     h6 Slots are shown for the shown for the next week. Click on any convenient slot
                     #contractordiv
                 hr
+    div(class="row")
+        div(class="box")
+            div(class="col-lg-12 text-center")
+                h4(class="intro-text", id="viewUpcomingJobs") View you upcoming jobs
+                hr
+
     script(type="text/javascript").
         $(document).ready(function() {
+            $(function() {
+                $( "#datepicker" ).datepicker({ minDate: +1, maxDate: "+7D" });
+                $.ajax({
+                    url: '/customer/upcomingJobs',
+                    type: 'GET',
+                    data: {email: !{JSON.stringify(email)}},
+                    success: function(result) {
+                        var table = $('<table/>')
+                        for (i = 0; i < result.length; i++) {
+                            var tr;
+                            tr = $('<tr/>');
+                            tr.append("<input type='checkbox' id="+result[i].record_id+" name='record_id'>")
+                            tr.append("<td>" + result[i].record_id + "</td>");
+                            tr.append("<td>" + result[i].worker_id + "</td>");
+                            tr.append("<td>" + result[i].worker + "</td>");
+                            tr.append("<td>" + result[i].service + "</td>");
+                            tr.append("<td>" + result[i].date + "</td>");
+                            tr.append("<td>" + result[i].begin_time + "</td>");
+                            tr.append("<td>" + result[i].end_time + "</td>");
+                            tr.append("<td>" + result[i].status + "</td>");
+                            table.appendChild(tr);
+                        }
+                        $("#upcomingjobstable").append(table);
+                        var button = '<button type="Submit" id="deleteRecSubmit">';
+                        button.appendChild(document.createTextNode("Sumbit"))
+                        $("#upcomingjobstable").append(button);
+                    }
+                });
+            });
+            $("body").on('click', '#deleteRecSubmit', function() {
+                var val = $("input:checked").attr('id');
+                $.ajax({
+                    url: '/business/deleteSerRecord',
+                    type: 'POST',
+                    data: {record_id: val},
+                    success: function(result) {
+                        location.reload();
+                    }
+                })
+            });
             rateJobs();
+            var bookSlotPreferences;
             $("#getSlotsForm").submit(function(e) {
                 console.log('Form Submit');
                 e.preventDefault();
                 var obj = {};
                 obj.service = $("#selservice").val();
                 obj.city = $("#selcity").val();
+                obj.date = $("#datepicker").val();
+                obj.time = $("#slotpicker").val();
+                console.log(obj);
                 $.ajax({
-                    url: '/business/getBookingContractorList',
+                    url: '/business/getContractorListBookSLot',
                     type: 'GET',
                     data: obj,
                     success: function (results) {
                         console.log(results);
-                        for (i = 0; i < results.length; i++) {
-                            var rec = results[i];
-                            var name = document.createElement("h4");
-                            name.appendChild(document.createTextNode(i+". "+rec.name));
-                            for (j = 0; j )
-                        }
+                        bookSlotPreferences.date = results.date;
+                        bookSlotPreferences.begin_time = results.date;
+                        bookSlotPreferences.end_time = results.date;
+                        bookSlotPreferences.service_recipient = !{JSON.stringify(email)};
+                        bookSlotPreferences.service = results.service;
+                    },
+                    failure: function failed (err)  {
+                        alert("Slot booking failed. Please try again");
                     }
                 });
             });
+            $("body").on('click', '.something', function() {
+                bookSlotPreferences.sm_id = sm_id;
+                bookSlotPreferences.worker_id = worker_id;
+                $.ajax({
+                    url: '/business/bookSlot',
+                    type: 'POST',
+                    data: bookSlotPreferences,
+                    success: function(results) {
+                        alert('Slot booked');
+                        location.reload();
+                    }
+                });
+            });
+
             function rateJobs() {
                 var email = !{JSON.stringify(email)}
                 console.log(email);
