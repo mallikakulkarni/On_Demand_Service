@@ -36,8 +36,8 @@
           <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-1.7407408">
-                  <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+                <state vertical-scroll-proportion="-2.2962964">
+                  <caret line="40" column="36" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
                   <folding />
                 </state>
               </provider>
@@ -53,21 +53,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="smoketests.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="smoketests.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/smoketests.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="131" column="49" selection-start-line="131" selection-start-column="49" selection-end-line="131" selection-end-column="49" />
+                <state vertical-scroll-proportion="0.601227">
+                  <caret line="142" column="33" selection-start-line="142" selection-start-column="33" selection-end-line="142" selection-end-column="33" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="customer.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="customer.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/customer.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.78527606">
-                  <caret line="139" column="1" selection-start-line="139" selection-start-column="1" selection-end-line="139" selection-end-column="1" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="109" column="30" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="30" />
                   <folding />
                 </state>
               </provider>
@@ -77,11 +77,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="business.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/routes/business.js">
+          <file leaf-file-name="customer.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/routes/customer.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.87229437">
-                  <caret line="383" column="8" selection-start-line="383" selection-start-column="8" selection-end-line="383" selection-end-column="8" />
+                <state vertical-scroll-proportion="0.42535788">
+                  <caret line="112" column="51" selection-start-line="112" selection-start-column="51" selection-end-line="112" selection-end-column="51" />
                   <folding />
                 </state>
               </provider>
@@ -111,8 +111,8 @@
         <option value="$PROJECT_DIR$/public/javascripts/admin.js" />
         <option value="$PROJECT_DIR$/routes/services.js" />
         <option value="$PROJECT_DIR$/routes/admin.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/business.js" />
+        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/test/smoketests.js" />
         <option value="$PROJECT_DIR$/routes/customer.js" />
       </list>
@@ -391,15 +391,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="test_smoketests_js - 2015.12.01 at 00h 53m 08s.xml">
-      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 00h 53m 55s.xml">
-      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 00h 54m 07s.xml">
-      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
     <history-entry file="test_smoketests_js - 2015.12.01 at 00h 54m 20s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
@@ -421,6 +412,15 @@
     <history-entry file="test_smoketests_js - 2015.12.01 at 01h 00m 59s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
+    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 04m 16s.xml">
+      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 04m 40s.xml">
+      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 06m 03s.xml">
+      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -432,7 +432,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.49166667" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15636556" sideWeight="0.5123675" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33802816" sideWeight="0.72152776" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33802816" sideWeight="0.72152776" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34186938" sideWeight="0.89513886" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15636556" sideWeight="0.5123675" order="2" side_tool="true" content_ui="tabs" />
@@ -757,14 +757,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7407408">
-          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/Query.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -805,18 +797,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.2962964">
+          <caret line="40" column="36" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/smoketests.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="131" column="49" selection-start-line="131" selection-start-column="49" selection-end-line="131" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.601227">
+          <caret line="142" column="33" selection-start-line="142" selection-start-column="33" selection-end-line="142" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/customer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78527606">
-          <caret line="139" column="1" selection-start-line="139" selection-start-column="1" selection-end-line="139" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.42535788">
+          <caret line="112" column="51" selection-start-line="112" selection-start-column="51" selection-end-line="112" selection-end-column="51" />
           <folding />
         </state>
       </provider>

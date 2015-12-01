@@ -110,7 +110,7 @@ function validatelogin(email, password, cb) {
 function getCustomerPublicView(record_id, cb) {
     var connection = createConnection();
     connection.connect();
-    connection.query('SELECT * FROM CUSTOMER_PUBLIC WHERE email = ' +
+    connection.query('SELECT * FROM customer_public WHERE email = ' +
                     '(SELECT service_recipient FROM service_record WHERE record_id = '+record_id+')', function(err, result){
         if (err) throw err;
         connection.end();

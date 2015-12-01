@@ -38,7 +38,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/business', business.router);
 app.use('/worker', worker);
-app.use('/customer', customer);
+app.use('/customer', customer.router);
 app.use('/services', services);
 app.use('/admin', admin.router);
 // catch 404 and forward to error handler
