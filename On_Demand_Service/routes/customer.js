@@ -134,4 +134,7 @@ function createConnection() {
     return connection
 }
 
-module.exports = router;
+module.exports = {
+    router: router,
+    getCustomerPublicView: getCustomerPublicView
+};

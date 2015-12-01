@@ -437,4 +437,23 @@ function createConnection() {
     });
     return connection
 }
-module.exports = router;
+module.exports = {
+    router: router,
+    cancelUpcomingJob:cancelUpcomingJob,
+    bookSlot:bookSlot,
+    getContractorAndWorkerList:getContractorAndWorkerList,
+    getWorkers:getWorkers,
+    checkBusinessExists:checkBusinessExists,
+    checkBusinessLogin:checkBusinessLogin,
+    businesssignup:businesssignup,
+    getPendingJobs:getPendingJobs,
+    getAllJobs:getAllJobs,
+    getContractorCount:getContractorCount,
+    getContractorList:getContractorList,
+    getContractorListForBooking:getContractorListForBooking,
+    getBookedSlots:getBookedSlots,
+    getServices:getServices,
+    getClauseForContractorDetails:getClauseForContractorDetails,
+    getServiceId:getServiceId,
+    createConnection:createConnection
+};

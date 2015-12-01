@@ -36,7 +36,7 @@ app.use(function(req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/business', business);
+app.use('/business', business.router);
 app.use('/worker', worker);
 app.use('/customer', customer);
 app.use('/services', services);
