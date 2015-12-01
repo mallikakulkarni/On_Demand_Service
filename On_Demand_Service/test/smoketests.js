@@ -1,9 +1,23 @@
+global.env = 'test'
+
 var assert = require('assert');
+var db = require('../routes/db')
 var admin = require('../routes/admin')
 var business = require('../routes/business')
 var customer = require('../routes/customer')
 var services = require('../routes/services')
 var worker = require('../routes/worker')
+var exec = require('child_process').exec,
+    child;
+
+child = exec('mysql -uroot -pnewpwd < create_test_db.sql; mysql -uroot -pnewpwd tmp_test < ./test/mock_data_for_testing.sql',
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+    });
 
 describe('Admin', function () {
     describe('getServices', function () {

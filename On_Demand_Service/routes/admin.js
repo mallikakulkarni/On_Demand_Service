@@ -148,7 +148,7 @@ function getSmallBusinesses(callback)   {
 }
 
 function getServices(callback)   {
-    var connection = createConnection();
+    var connection = createConnection({multipleStatements: true});
     connection.connect();
     connection.query('select * from service', function(err, rows){
         if(err)  {
@@ -167,5 +167,6 @@ module.exports = {
     router: router,
     getServices: getServices,
     getSmallBusinesses: getSmallBusinesses,
-    validate_Admin: validate_Admin
+    validate_Admin: validate_Admin,
+    createConnection: createConnection
 };

@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS `tmp_test`;
+CREATE DATABASE `tmp_test`;
+
