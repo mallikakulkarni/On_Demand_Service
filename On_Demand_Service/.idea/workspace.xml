@@ -20,34 +20,34 @@
     <favorites_list name="On_Demand_Service" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.7638191">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file leaf-file-name="admin.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/routes/admin.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-5.148148">
-                  <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="118" selection-end-column="1" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="db.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="db.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/db.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.18404908">
-                  <caret line="6" column="64" selection-start-line="6" selection-start-column="64" selection-end-line="6" selection-end-column="64" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app.js">
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/mysql/index.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="53" column="24" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
+                  <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/routes/users.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -56,20 +56,27 @@
           <file leaf-file-name="business.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/business.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="383" column="8" selection-start-line="383" selection-start-column="8" selection-end-line="383" selection-end-column="8" />
+                <state vertical-scroll-proportion="-2.2222223">
+                  <caret line="4" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="smoketests.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="smoketests.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/smoketests.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+                <state vertical-scroll-proportion="0.36809817">
+                  <caret line="73" column="7" selection-start-line="73" selection-start-column="7" selection-end-line="73" selection-end-column="7" />
                   <folding />
                 </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="child_process.js" pinned="false" current-in-tab="false">
+            <entry file="mock://internal/child_process.js">
+              <provider selected="true" editor-type-id="vmFileEditor">
+                <state />
               </provider>
             </entry>
           </file>
@@ -83,21 +90,31 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="mock_data_for_testing.sql" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test/mock_data_for_testing.sql">
+          <file leaf-file-name="customer.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/routes/customer.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+                <state vertical-scroll-proportion="-5.7777777">
+                  <caret line="119" column="21" selection-start-line="119" selection-start-column="21" selection-end-line="119" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="customer.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/routes/customer.js">
+          <file leaf-file-name="Connection.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/mysql/lib/Connection.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="109" column="30" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="30" />
+                  <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Protocol.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/node_modules/mysql/lib/protocol/Protocol.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -107,22 +124,34 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="worker.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="worker.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/routes/worker.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
+                <state vertical-scroll-proportion="0.045454547">
+                  <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="customer.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="customer.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/customer.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.061349694">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-                  <folding />
+                  <folding>
+                    <marker date="1448964312000" expanded="true" signature="212:316" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="279:312" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="362:799" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="435:796" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="474:527" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="533:790" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="711:780" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="844:1020" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="1068:1155" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="1118:1151" placeholder="{...}" />
+                    <marker date="1448964312000" expanded="true" signature="4104:4176" placeholder="{...}" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -141,7 +170,7 @@
             <entry file="file://$PROJECT_DIR$/routes/services.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="36" column="65" selection-start-line="36" selection-start-column="65" selection-end-line="36" selection-end-column="65" />
+                  <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -169,16 +198,18 @@
         <option value="$PROJECT_DIR$/views/Admin_Signin.jade" />
         <option value="$PROJECT_DIR$/views/Admin_Dashboard.jade" />
         <option value="$PROJECT_DIR$/public/javascripts/admin.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/test/mock_data_for_testing.sql" />
+        <option value="$PROJECT_DIR$/test/create_test_db.sql" />
+        <option value="$PROJECT_DIR$/routes/admin.js" />
+        <option value="$PROJECT_DIR$/routes/db.js" />
         <option value="$PROJECT_DIR$/routes/business.js" />
         <option value="$PROJECT_DIR$/routes/services.js" />
         <option value="$PROJECT_DIR$/routes/worker.js" />
-        <option value="$PROJECT_DIR$/app.js" />
+        <option value="internal/module.js" />
         <option value="$PROJECT_DIR$/routes/customer.js" />
-        <option value="$PROJECT_DIR$/routes/admin.js" />
-        <option value="$PROJECT_DIR$/test/mock_data_for_testing.sql" />
-        <option value="$PROJECT_DIR$/test/create_test_db.sql" />
+        <option value="internal/child_process.js" />
         <option value="$PROJECT_DIR$/test/smoketests.js" />
-        <option value="$PROJECT_DIR$/routes/db.js" />
       </list>
     </option>
   </component>
@@ -366,7 +397,7 @@
       <recent name="$PROJECT_DIR$/public/images" />
     </key>
   </component>
-  <component name="RunManager" selected="Mocha.test/smoketests.js">
+  <component name="RunManager" selected="Node.js.www">
     <configuration default="false" name="www" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="/usr/local/bin/node" path-to-js-file="www" working-dir="$PROJECT_DIR$/bin">
       <method />
     </configuration>
@@ -436,8 +467,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Mocha.test/smoketests.js" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.www" />
+        <item index="0" class="java.lang.String" itemvalue="Node.js.www" />
+        <item index="1" class="java.lang.String" itemvalue="Mocha.test/smoketests.js" />
       </list>
     </recent_temporary>
   </component>
@@ -455,40 +486,40 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 37m 13s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 10m 13s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 37m 38s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 12m 04s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 39m 06s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 12m 34s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 41m 07s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 13m 39s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 42m 28s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 14m 42s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 43m 06s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 17m 45s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 46m 08s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 17m 56s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 47m 11s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 22m 16s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 47m 27s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 23m 32s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 47m 58s.xml">
+    <history-entry file="test_smoketests_js - 2015.12.01 at 02h 23m 51s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15856236" sideWeight="0.4876325" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -496,7 +527,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.49166667" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15636556" sideWeight="0.5123675" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33802816" sideWeight="0.72152776" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33802816" sideWeight="0.72152776" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34186938" sideWeight="0.89513886" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15636556" sideWeight="0.5123675" order="2" side_tool="true" content_ui="tabs" />
@@ -548,25 +579,30 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/business.js</url>
-          <line>383</line>
+          <line>384</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/customer.js</url>
+          <line>122</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/smoketests.js</url>
+          <line>23</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/test/smoketests.js</url>
+          <line>25</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="5" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/images/DeathtoStock_Wired9.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/images/DeathtoStock_Wired8.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/images/DeathtoStock_Wired7.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -775,50 +811,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/Query.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="82" column="17" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/workertest.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="65" selection-start-line="36" selection-start-column="65" selection-end-line="36" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24539877">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/worker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -831,7 +827,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/mysql/index.js">
+    <entry file="file://$PROJECT_DIR$/test/mock_data_for_testing.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/Query.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="7" selection-start-line="127" selection-start-column="7" selection-end-line="127" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.666667">
+          <caret line="161" column="38" selection-start-line="161" selection-start-column="22" selection-end-line="161" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -839,26 +859,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/customer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="109" column="30" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/business.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="383" column="8" selection-start-line="383" selection-start-column="8" selection-end-line="383" selection-end-column="8" />
+        <state vertical-scroll-proportion="-2.2222223">
+          <caret line="4" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/mock_data_for_testing.sql">
+    <entry file="file://$PROJECT_DIR$/routes/services.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/worker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.045454547">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -871,26 +899,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.148148">
-          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="118" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/smoketests.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/mysql/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/db.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18404908">
-          <caret line="6" column="64" selection-start-line="6" selection-start-column="64" selection-end-line="6" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/mysql/lib/protocol/Protocol.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/mysql/lib/Connection.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/customer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.7777777">
+          <caret line="119" column="21" selection-start-line="119" selection-start-column="21" selection-end-line="119" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/smoketests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36809817">
+          <caret line="73" column="7" selection-start-line="73" selection-start-column="7" selection-end-line="73" selection-end-column="7" />
           <folding />
         </state>
       </provider>

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var db = require('./db');
+var createConnection = db.createConnection;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -110,21 +111,6 @@ function getWorkerRating(worker_id, sm_id, cb) {
         connection.end();
         return cb(result[result.length - 1]);
     });
-}
-
-function createConnection() {
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'newpwd',
-        port: 3306,
-        database: 'project',
-        useTransaction: {
-            connectionLimit: 5
-        },
-        multipleStatements: true
-    });
-    return connection
 }
 
 module.exports = {router: router, checkWorkerExists: checkWorkerExists};

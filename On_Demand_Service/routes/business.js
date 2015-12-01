@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var db = require('./db');
+var createConnection = db.createConnection;
 var async = require("async");
 
 
@@ -424,19 +425,6 @@ function getServiceId(service, cb) {
     })
 }
 
-function createConnection() {
-    var connection = mysql.createConnection({
-        host     : 'localhost',
-        user     : 'root',
-        password : 'newpwd',
-        port     :  3306,
-        database : 'project',
-        useTransaction: {
-            connectionLimit: 10
-        }
-    });
-    return connection
-}
 module.exports = {
     router: router,
     cancelUpcomingJob:cancelUpcomingJob,

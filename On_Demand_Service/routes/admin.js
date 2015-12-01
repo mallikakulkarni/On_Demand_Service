@@ -4,7 +4,8 @@
 
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var db = require('./db');
+var createConnection = db.createConnection;
 
 router.get('/signin', function(req,res){
     var c = req.cookies.loggedInAdminID;
@@ -107,16 +108,6 @@ router.post('/signin', function(req, res){
         }
     })
 });
-
-function createConnection() {
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'newpwd',
-        database: 'project'
-    });
-    return connection
-}
 
 function validate_Admin(adminID, password, flag){
     var success = null;
