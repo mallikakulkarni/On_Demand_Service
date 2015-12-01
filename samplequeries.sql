@@ -1,11 +1,13 @@
 use project;
 
 select * from service_record;
+select * from schedule;
+select * from worker_availability;
 select * from service;
 select * from service_recipient;
 select * from worker;
 select * from small_business;
-select * from schedule;
+
 
 alter table service_record add admin_review boolean;
 alter table service_record drop admin_review;
@@ -105,5 +107,5 @@ select now() from small_business;
 
 update schedule set date = now() where slot_id = '5';
 
-
+update service_record set rating = NULL where service_status <> 'Pending';
 select * from schedule;
