@@ -1,5 +1,4 @@
 from functools import wraps, update_wrapper
-
 import datetime
 from flask import Flask, render_template, jsonify, make_response, request, current_app
 from pymongo import MongoClient
@@ -10,6 +9,10 @@ app = Flask(__name__)
 client = MongoClient()
 db = client.log_database
 collection = db.log
+
+
+def encode_time(value):
+    return datetime.datetime.combine(value, datetime.datetime.min.time())
 
 
 def add_response_headers(headers={}):
@@ -68,7 +71,7 @@ def crossdomain(origin=None, methods=None, headers=None,
 
             h = resp.headers
 
-            h['Access-Control-Allow-Origin'] = origin
+            h['Access-Control-Allow-Origin'] = "*"
             h['Access-Control-Allow-Methods'] = get_methods()
             h['Access-Control-Max-Age'] = str(max_age)
             if headers is not None:
@@ -397,6 +400,37 @@ def worker_daily_registered_visits():
         return resp
     else:
         return render_template("error.html"), 400
+
+
+@app.route("/log/", methods=['POST', 'OPTIONS'])
+@crossdomain(origin="*")
+def log():
+    d = request.form
+    user_id = d.get('userID', "")
+    worker_id = d.get('workerID', "")
+    business_id = d.get('businessID', "")
+    search_term = d.get('searchTerm', "")
+    page_name = d.get('pageName', "")
+    action = d.get('action', "")
+    user_agent = request.headers.get('User-Agent')
+    ip_address = d.get("ipAddress", "")
+    referrer = d.get("referrer", "")
+    l = {
+        "log_date": encode_time(datetime.datetime.now()),
+        "log_timestamp": datetime.datetime.now(),
+        "user_id": user_id,
+        "worker_id": worker_id,
+        "business_id": business_id,
+        "search_term": search_term,
+        "page_name": page_name,
+        "action": action,
+        "user_agent": user_agent,
+        "ip_address": ip_address,
+        "referrer": referrer
+    }
+    db.log.insert_one(l)
+
+    return make_response(json.dumps({"done": True}, default=json_util.default))
 
 
 if __name__ == "__main__":
