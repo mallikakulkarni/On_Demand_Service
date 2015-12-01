@@ -163,4 +163,7 @@ function getServices(callback)   {
 }
 
 
-module.exports = router;
+module.exports = {
+    router: router,
+    getServices: getServices
+};

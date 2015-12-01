@@ -40,7 +40,7 @@ app.use('/business', business);
 app.use('/worker', worker);
 app.use('/customer', customer);
 app.use('/services', services);
-app.use('/admin', admin);
+app.use('/admin', admin.router);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
