@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var db = require('./db');
+var createConnection = db.createConnection;
 var async = require("async");
 
 
@@ -432,17 +433,23 @@ function getServiceId(service, cb) {
     })
 }
 
-function createConnection() {
-    var connection = mysql.createConnection({
-        host     : 'localhost',
-        user     : 'root',
-        password : 'newpwd',
-        port     :  3306,
-        database : 'project',
-        useTransaction: {
-            connectionLimit: 10
-        }
-    });
-    return connection
-}
-module.exports = router;
+module.exports = {
+    router: router,
+    cancelUpcomingJob:cancelUpcomingJob,
+    bookSlot:bookSlot,
+    getContractorAndWorkerList:getContractorAndWorkerList,
+    getWorkers:getWorkers,
+    checkBusinessExists:checkBusinessExists,
+    checkBusinessLogin:checkBusinessLogin,
+    businesssignup:businesssignup,
+    getPendingJobs:getPendingJobs,
+    getAllJobs:getAllJobs,
+    getContractorCount:getContractorCount,
+    getContractorList:getContractorList,
+    getContractorListForBooking:getContractorListForBooking,
+    getBookedSlots:getBookedSlots,
+    getServices:getServices,
+    getClauseForContractorDetails:getClauseForContractorDetails,
+    getServiceId:getServiceId,
+    createConnection:createConnection
+};

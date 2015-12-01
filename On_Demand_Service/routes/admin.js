@@ -4,7 +4,8 @@
 
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var db = require('./db');
+var createConnection = db.createConnection;
 
 router.get('/signin', function(req,res){
     var c = req.cookies.loggedInAdminID;
@@ -108,16 +109,6 @@ router.post('/signin', function(req, res){
     })
 });
 
-function createConnection() {
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'password',
-        database: 'project'
-    });
-    return connection
-}
-
 function validate_Admin(adminID, password, flag){
     var success = null;
     var connection = createConnection();
@@ -148,7 +139,7 @@ function getSmallBusinesses(callback)   {
 }
 
 function getServices(callback)   {
-    var connection = createConnection();
+    var connection = createConnection({multipleStatements: true});
     connection.connect();
     connection.query('select * from service', function(err, rows){
         if(err)  {
@@ -163,4 +154,10 @@ function getServices(callback)   {
 }
 
 
-module.exports = router;
+module.exports = {
+    router: router,
+    getServices: getServices,
+    getSmallBusinesses: getSmallBusinesses,
+    validate_Admin: validate_Admin,
+    createConnection: createConnection
+};

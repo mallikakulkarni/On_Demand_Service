@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
-var fs = require('fs');
+var db = require('./db');
+var createConnection = db.createConnection;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+    router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
@@ -41,7 +41,7 @@ function checkWorkerExists(name, sm_id, cb) {
     console.log(name, sm_id);
     var connection = createConnection();
     connection.connect();
-    connection.query("SELECT * FROM WORKER WHERE name = '"+name+"' AND sm_id = "+sm_id, function(err, rows) {
+    connection.query("SELECT * FROM worker WHERE name = '"+name+"' AND sm_id = "+sm_id, function(err, rows) {
         if (err) throw err;
         connection.end();
         console.log(rows);
@@ -113,19 +113,4 @@ function getWorkerRating(worker_id, sm_id, cb) {
     });
 }
 
-function createConnection() {
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'newpwd',
-        port: 3306,
-        database: 'project',
-        useTransaction: {
-            connectionLimit: 5
-        },
-        multipleStatements: true
-    });
-    return connection
-}
-
-module.exports = router;
+module.exports = {router: router, checkWorkerExists: checkWorkerExists};
