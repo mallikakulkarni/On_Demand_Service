@@ -63,7 +63,7 @@ router.get('/getInitialContractorList', function(req, res) {
 
 router.get('/getBookingContractorList', function(req, res) {
     getClauseForContractorDetails(req.query.service, req.query.city, function(clause) {
-        getContractorCount(clause, req.query.city, req.query.service, function(countcity){
+        getContractorCount(clause, req.query.city, function(countcity){
             var city = countcity.city === '' ? 'All Cities' : countcity.city;
             var service = getServiceId(req.query.service, function(service) {
                 getContractorListForBooking(clause,service.service_id, 1, 5, function(results) {
@@ -82,6 +82,7 @@ router.get('/getContractorListBookSLot', function(req, res) {
 });
 
 router.post('/bookSlot', function(req, res) {
+    console.log(req.body);
     bookSlot(req.body, function(success) {
         res.send({success: success});
     });
@@ -113,7 +114,7 @@ function cancelUpcomingJob(record_id, cb) {
                     throw err;
                 });
             }
-            connection.query("delete from worker_availability where record_id = '"+record_id+"' " +
+            connection.query("delete from worker_availability where worker_id = '"+worker_id+"' " +
             "AND sm_id = '"+sm_id+"' AND slot_id = '"+slot_id+"'", function (err, result) {
                 if (err) {
                     return connection.rollback(function() {
@@ -142,62 +143,67 @@ function cancelUpcomingJob(record_id, cb) {
 }
 
 function bookSlot(obj, cb) {
+    console.log(obj);
     var connection = createConnection();
     connection.connect();
     connection.query("SELECT service_id FROM service WHERE name = ('"+obj.service+"')", function(err, rows) {
         if (err) throw err;
-        obj.service = rows[0];
-    });
-    var slot_id = Math.floor(Math.random() * 100000000) + 1;
-    var record_id = Math.floor(Math.random() * 100000000) + 1;
-    var slotObject = {};
-    slotObject.slot_id = slot_id;
-    slotObject.date = obj.date;
-    slotObject.begin_time = obj.begin_time;
-    slotObject.end_time = obj.end_time;
-    var recordObject = {};
-    recordObject.record_id = record_id;
-    recordObject.worker_id = obj.worker_id;
-    recordObject.sm_id = obj.sm_id;
-    recordObject.slot_id = slot_id;
-    recordObject.service_id = obj.service;
-    recordObject.service_recipient = obj.service_recipient;
-    recordObject.service_status = 'PENDING';
-    recordObject.rating = NULL;
-    recordObject.admin_review = false;
-    var workerAvailObj = {};
-    workerAvailObj.worker_id = obj.worker_id;
-    workerAvailObj.sm_id = obj.sm_id;
-    workerAvailObj.service_id = obj.service;
-    workerAvailObj.slot_id = slot_id;
-    connection.beginTransaction(function(err) {
-        if (err) throw err;
-        connection.query("INSERT INTO schedule SET ?", slotObject, function (err, rows) {
-            if (err) {
-                return connection.rollback(function () {
-                    throw err;
-                });
-            }
-            connection.query('INSERT INTO service_record VALUES ?', recordObject, function (err, result) {
+        obj.service = rows[0].service_id;
+        console.log(obj);
+        var slot_id = ""+Math.floor(Math.random() * 100000000) + 1;
+        var record_id = ""+Math.floor(Math.random() * 100000000) + 1;
+        var slotObject = {};
+        slotObject.slot_id = slot_id;
+        slotObject.date = obj.date;
+        slotObject.begin_time = obj.begin_time;
+        slotObject.end_time = obj.end_time;
+        console.log(slotObject);
+        var recordObject = {};
+        recordObject.record_id = record_id;
+        recordObject.worker_id = obj.worker_id;
+        recordObject.sm_id = obj.sm_id;
+        recordObject.slot_id = slot_id;
+        recordObject.service_id = obj.service;
+        recordObject.service_recipient = obj.service_recipient;
+        recordObject.service_status = 'PENDING';
+        recordObject.rating = null;
+        recordObject.admin_review = false;
+        console.log(recordObject);
+        var workerAvailObj = {};
+        workerAvailObj.worker_id = obj.worker_id;
+        workerAvailObj.sm_id = obj.sm_id;
+        workerAvailObj.service_id = obj.service;
+        workerAvailObj.slot_id = slot_id;
+        console.log(workerAvailObj);
+        connection.beginTransaction(function(err) {
+            if (err) throw err;
+            connection.query("INSERT INTO schedule SET ?", slotObject, function (err, rows) {
                 if (err) {
-                    return connection.rollback(function() {
+                    return connection.rollback(function () {
                         throw err;
                     });
                 }
-                connection.query('INSERT INTO worker_availability VALUES ?', workerAvailObj, function (err, result) {
+                connection.query('INSERT INTO service_record SET ?', recordObject, function (err, result) {
                     if (err) {
                         return connection.rollback(function() {
                             throw err;
                         });
                     }
-                    connection.commit(function(err) {
+                    connection.query('INSERT INTO worker_availability SET ?', workerAvailObj, function (err, result) {
                         if (err) {
-                            return connection.rollback(function () {
+                            return connection.rollback(function() {
                                 throw err;
                             });
                         }
-                        connection.end();
-                        return cb(true);
+                        connection.commit(function(err) {
+                            if (err) {
+                                return connection.rollback(function () {
+                                    throw err;
+                                });
+                            }
+                            connection.end();
+                            return cb(true);
+                        });
                     });
                 });
             });
@@ -206,6 +212,7 @@ function bookSlot(obj, cb) {
 }
 
 function getContractorAndWorkerList(obj, cb) {
+    console.log(obj);
     var begin_time, end_time;
     if (obj.time === "8:00 AM to 12 Noon") {
         begin_time = 800;
@@ -229,6 +236,7 @@ function getContractorAndWorkerList(obj, cb) {
         }
         async.map(contractors, getWorkers, function(err, modContractors) {
             if (err) throw err;
+            console.log('modcontractors');
             console.log(modContractors);
             return cb(modContractors);
         });
@@ -282,7 +290,7 @@ function businesssignup(businessobject, cb) {
     businessobject.sm_id = Math.floor(Math.random() * 100000000) + 1;
     var connection = createConnection();
     connection.connect();
-    connection.query('INSERT INTO small_business_review SET ?', businessobject, function(err, result) {
+    connection.query('INSERT INTO small_business SET ?', businessobject, function(err, result) {
         if (err) {
             throw err;
         }
@@ -311,7 +319,7 @@ function getAllJobs(sm_id, cb) {
     });
 }
 
-function getContractorCount(clause, city, service,  cb) {
+function getContractorCount(clause, city, cb) {
     var connection = createConnection();
     connection.connect();
     var query = 'Select count(*) as count from small_business'+clause;

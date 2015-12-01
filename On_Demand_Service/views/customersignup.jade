@@ -4,4 +4,58 @@
 extends layout
 
 block content
-    h1 Customer Signup
+    div(class="container")
+        div(class="row")
+            div(class="box")
+                div(class="col-lg-12")
+                    hr
+                    h1 Customer Signup
+                    form(role="form" id="custsignupform" action='/customer/signup', method='POST')
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label Name
+                                input(type="text", class="form-control", placeholder="Name", id="name", name="name")
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label Email
+                                input(type="email", class="form-control", placeholder="Email", id="email", name="email")
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label Password
+                                input(type="password", class="form-control", placeholder="Password", id="password", name="password")
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label Street Address
+                                input(type="text", class="form-control", placeholder="Street Address", id="street_address", name="street_address")
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label States
+                                input(list="states", id="custstate", name="custstate")
+                                datalist(id="states")
+                                    option(value="CA")
+                                    option(value="NY")
+                                    option(value="NV")
+                                    option(value="TX")
+                                    option(value="WA")
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label City
+                                input(list="cities", id="custcity", name="custcity")
+                                datalist(id="cities")
+                                    option(value="San Jose")
+                                    option(value="San Francisco")
+                                    option(value="Sacramento")
+                                    option(value="Los Angeles")
+                                        option(value="San Diego")
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label Zip
+                                input(type="text", class="form-control", placeholder="Zip", , id="zip", name="zip")
+                        div(class="row")
+                            div(class="form-group col-lg-4")
+                                label Phone Number
+                                input(type="text", class="form-control", placeholder="Phone number", , id="mobile", name="mobile")
+                            hr
+                        div(class="modal-footer")
+                            button(type="submit", id="customersignupsubmit" class="btn btn-default") Submit
+                            button(type="button", class="btn btn-default", data-dismiss="modal") Reset

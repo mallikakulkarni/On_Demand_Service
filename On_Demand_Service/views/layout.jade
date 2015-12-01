@@ -33,7 +33,7 @@ html
         div(class="collapse navbar-collapse", id="bs-example-navbar-collapse-1")
             ul(class="nav navbar-nav")
                 li
-                    a(href="#") Home
+                    a(href="/") Home
                 li
                     a(href="#") About
                 li
@@ -111,17 +111,17 @@ html
                       div(class="row")
                           div(class="form-group col-lg-4")
                               label Zip
-                              input(type="text", class="form-control", placeholder="Zip")
+                              input(type="text", class="form-control", placeholder="Zip", , id="zip", name="zip")
                       div(class="row")
                           div(class="form-group col-lg-4")
                               label Phone Number
-                              input(type="text", class="form-control", placeholder="Phone number")
+                              input(type="text", class="form-control", placeholder="Phone number", , id="mobile", name="mobile")
                           hr
                           p Already have an Account?&nbsp
                           a(data-toggle="modal", data-target="#recloginmodal", class="close", data-dismiss="modal") Login
-              div(class="modal-footer")
-                  button(type="submit", id="customersignupsubmit" class="btn btn-default") Submit
-                  button(type="button", class="btn btn-default", data-dismiss="modal") Reset
+                      div(class="modal-footer")
+                          button(type="submit", id="customersignupsubmit" class="btn btn-default") Submit
+                          button(type="button", class="btn btn-default", data-dismiss="modal") Reset
   script(type="text/javascript").
       $(document).ready(function() {
           $("#customerloginsubmit").click(function() {

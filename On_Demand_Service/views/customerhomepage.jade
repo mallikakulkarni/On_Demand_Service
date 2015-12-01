@@ -52,16 +52,16 @@ block content
                     div(class="form-group col-lg-4")
                         button(type="submit", class="btn btn-default") Submit
                         button(type="reset", class="btn btn-default") Reset
-                div(class="col-lg-12")
-                    h4(class="intro-text") List Of Contractors
-                    h6 Slots are shown for the shown for the next week. Click on any convenient slot
-                    #contractordiv
+                div(id="contractordiv")
+
+
                 hr
     div(class="row")
         div(class="box")
             div(class="col-lg-12 text-center")
                 h4(class="intro-text", id="viewUpcomingJobs") View you upcoming jobs
                 hr
+                div(id="upcomingjobstable")
 
     script(type="text/javascript").
         $(document).ready(function() {
@@ -72,24 +72,28 @@ block content
                     type: 'GET',
                     data: {email: !{JSON.stringify(email)}},
                     success: function(result) {
-                        var table = $('<table/>')
-                        for (i = 0; i < result.length; i++) {
+                        console.log(result);
+                        var res = result.results;
+                        var table = $('<table/>');
+                        for (i = 0; i < res.length; i++) {
                             var tr;
                             tr = $('<tr/>');
-                            tr.append("<input type='checkbox' id="+result[i].record_id+" name='record_id'>")
-                            tr.append("<td>" + result[i].record_id + "</td>");
-                            tr.append("<td>" + result[i].worker_id + "</td>");
-                            tr.append("<td>" + result[i].worker + "</td>");
-                            tr.append("<td>" + result[i].service + "</td>");
-                            tr.append("<td>" + result[i].date + "</td>");
-                            tr.append("<td>" + result[i].begin_time + "</td>");
-                            tr.append("<td>" + result[i].end_time + "</td>");
-                            tr.append("<td>" + result[i].status + "</td>");
-                            table.appendChild(tr);
+                            tr.append("<input type='checkbox' id="+res[i].record_id+" name='record_id'>")
+                            tr.append("<td>" + res[i].Business + "</td>");
+                            tr.append("<td>" + res[i].Business_email + "</td>");
+                            tr.append("<td>" + res[i].record_id + "</td>");
+                            tr.append("<td>" + res[i].Worker + "</td>");
+                            tr.append("<td>" + res[i].Service + "</td>");
+                            tr.append("<td>" + res[i].Date + "</td>");
+                            tr.append("<td>" + res[i].Status + "</td>");
+                            table.append(tr);
                         }
+                        var res = result.results;
                         $("#upcomingjobstable").append(table);
-                        var button = '<button type="Submit" id="deleteRecSubmit">';
-                        button.appendChild(document.createTextNode("Sumbit"))
+                        var button = document.createElement('button');
+                        button.type = 'submit';
+                        button.id = 'deleteRecSubmit';
+                        button.appendChild(document.createTextNode("Submit"))
                         $("#upcomingjobstable").append(button);
                     }
                 });
@@ -106,7 +110,7 @@ block content
                 })
             });
             rateJobs();
-            var bookSlotPreferences;
+            var bookSlotPreferences = {};
             $("#getSlotsForm").submit(function(e) {
                 console.log('Form Submit');
                 e.preventDefault();
@@ -122,20 +126,41 @@ block content
                     data: obj,
                     success: function (results) {
                         console.log(results);
-                        bookSlotPreferences.date = results.date;
-                        bookSlotPreferences.begin_time = results.date;
-                        bookSlotPreferences.end_time = results.date;
+                        console.log(results[0]);
+                        console.log(results[0].date);
+                        bookSlotPreferences.date = results[0].date;
+                        bookSlotPreferences.begin_time = results[0].begin_time;
+                        bookSlotPreferences.end_time = results[0].end_time;
                         bookSlotPreferences.service_recipient = !{JSON.stringify(email)};
-                        bookSlotPreferences.service = results.service;
+                        bookSlotPreferences.service = results[0].service;
+                        var div = document.getElementById('contractordiv');
+                        var h4 = document.createElement('h4');
+                        h4.appendChild(document.createTextNode("List Of Contractors"));
+                        var h6 = document.createElement('h6');
+                        h6.appendChild(document.createTextNode("Please Click on any worker name to automatically book the service"));
+                        div.appendChild(h4);
+                        div.appendChild(h6);
+                        var out = "<h4>List Of Contractors</h4><h6>Please Click on any worker name to automatically book the service</h6>";
+                        for (i = 0; i < results.length; i++) {
+                            out += "<ul>"+results[i].name;
+                            for (j = 0; j < results[i].workers.length; j++) {
+                                out += "<li><a id='"+results[i].sm_id+"-"+results[i].workers[j].worker_id+"' class='workerClass'>"+results[i].workers[j].name+"</a></li>";
+                            }
+                            out += "</ul>"
+                        }
+                        $("#contractordiv").html(out);
                     },
                     failure: function failed (err)  {
                         alert("Slot booking failed. Please try again");
                     }
                 });
             });
-            $("body").on('click', '.something', function() {
-                bookSlotPreferences.sm_id = sm_id;
-                bookSlotPreferences.worker_id = worker_id;
+            $("body").on('click', '.workerClass', function() {
+                console.log('Worker class');
+                var val = $(this).attr('id');
+                var arr = val.split('-');
+                bookSlotPreferences.sm_id = arr[0];
+                bookSlotPreferences.worker_id = arr[1];
                 $.ajax({
                     url: '/business/bookSlot',
                     type: 'POST',
