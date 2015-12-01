@@ -3,7 +3,7 @@ var admin = require('../routes/admin')
 var business = require('../routes/business')
 var customer = require('../routes/customer')
 var services = require('../routes/services')
-
+var worker = require('../routes/worker')
 
 describe('Admin', function () {
     describe('getServices', function () {
@@ -154,6 +154,17 @@ describe('Services', function () {
     describe('getAllServices', function () {
         it('getAllServices works', function (done) {
             services.getAllServices(function (response) {
+                assert.notEqual(response, null);
+                done();
+            })
+        });
+    });
+});
+
+describe('Worker', function () {
+    describe('checkWorkerExists', function () {
+        it('checkWorkerExists works', function (done) {
+            worker.checkWorkerExists('Jane Doe', 1, function (response) {
                 assert.notEqual(response, null);
                 done();
             })

@@ -40,7 +40,7 @@ function checkWorkerExists(name, sm_id, cb) {
     console.log(name, sm_id);
     var connection = createConnection();
     connection.connect();
-    connection.query("SELECT * FROM WORKER WHERE name = '"+name+"' AND sm_id = "+sm_id, function(err, rows) {
+    connection.query("SELECT * FROM worker WHERE name = '"+name+"' AND sm_id = "+sm_id, function(err, rows) {
         if (err) throw err;
         connection.end();
         console.log(rows);
@@ -127,4 +127,4 @@ function createConnection() {
     return connection
 }
 
-module.exports = router;
+module.exports = {router: router, checkWorkerExists: checkWorkerExists};

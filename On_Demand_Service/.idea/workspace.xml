@@ -56,8 +56,8 @@
           <file leaf-file-name="smoketests.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/smoketests.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.12269939">
-                  <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+                <state vertical-scroll-proportion="0.601227">
+                  <caret line="165" column="8" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="8" />
                   <folding />
                 </state>
               </provider>
@@ -77,6 +77,16 @@
       </split-first>
       <split-second>
         <leaf>
+          <file leaf-file-name="worker.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/routes/worker.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.32515338">
+                  <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="customer.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/customer.js">
               <provider selected="true" editor-type-id="text-editor">
@@ -97,10 +107,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="services.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="services.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/services.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.78527606">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="36" column="65" selection-start-line="36" selection-start-column="65" selection-end-line="36" selection-end-column="65" />
                   <folding />
                 </state>
@@ -135,6 +145,7 @@
         <option value="$PROJECT_DIR$/routes/services.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/test/smoketests.js" />
+        <option value="$PROJECT_DIR$/routes/worker.js" />
       </list>
     </option>
   </component>
@@ -411,15 +422,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="test_smoketests_js - 2015.12.01 at 00h 58m 26s.xml">
-      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 00h 58m 51s.xml">
-      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 00m 24s.xml">
-      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
     <history-entry file="test_smoketests_js - 2015.12.01 at 01h 00m 32s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
@@ -439,6 +441,15 @@
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
     <history-entry file="test_smoketests_js - 2015.12.01 at 01h 08m 24s.xml">
+      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 10m 51s.xml">
+      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 11m 21s.xml">
+      <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="test_smoketests_js - 2015.12.01 at 01h 11m 31s.xml">
       <configuration name="test/smoketests.js" configurationId="mocha-javascript-test-runner" />
     </history-entry>
   </component>
@@ -686,14 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/images/6.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -703,14 +706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.125">
           <caret line="120" column="17" selection-start-line="120" selection-start-column="10" selection-end-line="120" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/worker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="121" column="13" selection-start-line="121" selection-start-column="13" selection-end-line="121" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -804,7 +799,7 @@
     <entry file="file://$PROJECT_DIR$/routes/customer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="109" column="30" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="30" />
+          <caret line="112" column="51" selection-start-line="112" selection-start-column="51" selection-end-line="112" selection-end-column="51" />
           <folding />
         </state>
       </provider>
@@ -819,7 +814,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78527606">
+        <state vertical-scroll-proportion="0.0">
           <caret line="36" column="65" selection-start-line="36" selection-start-column="65" selection-end-line="36" selection-end-column="65" />
           <folding />
         </state>
@@ -833,10 +828,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24539877">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/smoketests.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12269939">
-          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.601227">
+          <caret line="165" column="8" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/worker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32515338">
+          <caret line="42" column="42" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
           <folding />
         </state>
       </provider>
