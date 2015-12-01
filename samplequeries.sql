@@ -39,12 +39,12 @@ insert into worker values ('123456', '58934997', 'secret', 'John Deer');
 insert into worker values ('900', '58934997', 'secret', 'Bill Weasley');
 insert into service_provider values ('900', '58934997', '2');
 
-insert into service_record values ('1', '123456', '58934997', '1', '1', 's@g.com', 'PENDING', null);
-insert into service_record values ('2', '123456', '58934997', '2', '1', 's@g.com', 'PENDING', 1);
-insert into service_record values ('3', '123456', '58934997', '3', '1', 's@g.com', 'FINISHED', 4);
-insert into service_record values ('4', '123456', '58934997', '4', '1', 's@g.com', 'PAID', 3);
-insert into service_record values ('5', '890', '1', '4', '1', 's@g.com', 'PAID', NULL, false);
-insert into service_record values ('6', '890', '1', '4', '1', 's@g.com', 'PAID', NULL, false);
+insert into service_record values ('1', '123456', '58934997', '1', '1', 's@g.com', 'PENDING', null, 0);
+insert into service_record values ('2', '123456', '58934997', '2', '1', 's@g.com', 'PENDING', 1, 0);
+insert into service_record values ('3', '123456', '58934997', '3', '1', 's@g.com', 'FINISHED', null, 0);
+insert into service_record values ('4', '123456', '58934997', '4', '1', 's@g.com', 'PAID', null, 0);
+insert into service_record values ('5', '890', '1', '4', '1', 's@g.com', 'PAID', NULL, false, 0);
+insert into service_record values ('6', '890', '1', '4', '1', 's@g.com', 'PAID', NULL, false, 0);
 
 update service_record set rating = null where record_id = '2';
 

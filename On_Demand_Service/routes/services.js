@@ -12,7 +12,7 @@ router.get('/browseservices', function(req, res, next) {
 function getAllServices(cb) {
     var connection = createConnection();
     connection.connect();
-    connection.query('SELECT * FROM SERVICE_Public', function(err, rows) {
+    connection.query('SELECT * FROM service_public', function(err, rows) {
         if (err) throw err;
         connection.end();
         return cb(rows);
