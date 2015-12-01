@@ -125,7 +125,7 @@ describe('hooks', function () {
 
         describe('getContractorCount', function () {
             it('getContractorCount works', function (done) {
-                business.getContractorCount('', '', '', function (response) {
+                business.getContractorCount('', '', function (response) {
                     assert.notEqual(response, null);
                     done();
                 })
@@ -200,7 +200,6 @@ describe('hooks', function () {
             });
         });
     });
-
 
 
 });
