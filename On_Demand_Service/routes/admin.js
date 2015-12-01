@@ -112,7 +112,7 @@ function createConnection() {
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: 'password',
+        password: 'newpwd',
         database: 'project'
     });
     return connection
@@ -165,5 +165,7 @@ function getServices(callback)   {
 
 module.exports = {
     router: router,
-    getServices: getServices
+    getServices: getServices,
+    getSmallBusinesses: getSmallBusinesses,
+    validate_Admin: validate_Admin
 };
