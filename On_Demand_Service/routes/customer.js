@@ -24,8 +24,9 @@ router.post('/login', function (req, res) {
     })
 });
 
-router.post('/rate', function (req, res) {
-    insertRating(req.body.record_id, req.body.val, function (message) {
+router.post('/rate', function(req, res) {
+    writelog(Date.now() + " Inserted review for "+req.body.record_id);
+    insertRating(req.body.record_id, req.body.val, function(message) {
         if (message === true) {
             res.send({message: "Rating inserted"})
         }
@@ -38,9 +39,10 @@ router.get('/rateJobs', function (req, res) {
     });
 });
 
-router.post('/signup', function (req, res) {
-    validatesignup(req.body.email, function (result) {
-        if (result.exists === true) {
+router.post('/signup', function(req, res) {
+    validatesignup(req.body.email, function(exists) {
+        console.log(exists);
+        if (exists.exists === true) {
             res.render('customerlogin');
         } else {
             signupCustomer(req.body, function (result) {
@@ -50,10 +52,47 @@ router.post('/signup', function (req, res) {
     })
 });
 
-function signupCustomer(obj, cb) {
+router.get('/upcomingJobs', function(req, res) {
+    getUpcomingJobs(req.query.email, function(results) {
+        res.send({results: results});
+    });
+});
+
+function getUpcomingJobs(email, cb) {
     var connection = createConnection();
     connection.connect();
-    connection.query('INSERT INTO schedule SET ?', obj, function (err, res) {
+    connection.query("select * from service_record_public where record_id in " +
+                    "(select record_id from service_record where service_recipient = '"+email+"' AND " +
+                    "service_status = 'PENDING')", function(err, rows) {
+        if (err) throw err;
+        return cb(rows);
+    });
+}
+
+function validatesignup(email, cb) {
+    var connection = createConnection();
+    connection.connect();
+    connection.query('select * from service_recipient where email = "'+email+'"', function(err, rows) {
+        if (err) throw err;
+        console.log(rows);
+        if (rows !== null) {
+            return cb({exists: true});
+        } else {
+            return cb({exists: false});
+        }
+    })
+}
+
+function signupCustomer(obj, cb) {
+    var city = obj.custcity;
+    var state = obj.custstate;
+    delete obj.custcity;
+    delete obj.custstate;
+    obj.city = city;
+    obj.state = state;
+    var connection = createConnection();
+    connection.connect();
+    connection.query('INSERT INTO service_recipient SET ?', obj, function(err, res) {
         if (err) throw err;
         connection.end();
         return cb({name: obj.name, email: obj.email, city: obj.city});

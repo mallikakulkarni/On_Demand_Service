@@ -149,8 +149,8 @@ block content
                     type: 'POST',
                     data: {workerObj: workerObj, servicesObj: servicesObj, sm_id: sm_id},
                     success: function (res) {
-                        console.log(res);
-                        if (res) {
+                        console.log(res.exists === true);
+                        if (res.exists === true) {
                             $("#warningtext").html('<p> You seemed to already have created a worker record with' +
                             'the same name. Are you sure you want to proceed? Click Ok to proceed and Cancel' +
                             'to cancel request</p><button id="workersignupconfirmbutton">OK</button>' +
@@ -160,6 +160,7 @@ block content
                         }
                     }
                 });
+                $("#workersignupform").trigger('reset');
                 e.preventDefault();
             });
             $("body").on('click', '#workersignupconfirmbutton', function() {

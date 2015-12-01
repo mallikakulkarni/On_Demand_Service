@@ -4,8 +4,8 @@ var db = require('./db');
 var createConnection = db.createConnection;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    router.get('/', function(req, res, next) {
+    res.render('index', { title: 'Express' });
 });
 
 router.get('/getRating', function(req, res, next) {
