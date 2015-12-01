@@ -37,6 +37,27 @@ router.get('/rateJobs', function(req, res) {
     });
 });
 
+router.post('/signup', function(req, res) {
+    validatesignup(req.body.email, function(result) {
+        if (result.exists === true) {
+            res.render('customerlogin');
+        } else {
+            signupCustomer(req.body, function(result) {
+                res.render('customerhomepage', {name: result.name, email: result.email, city: result.city});
+            })
+        }
+    })
+});
+
+function signupCustomer(obj, cb) {
+    var connection = createConnection();
+    connection.connect();
+    connection.query('INSERT INTO schedule SET ?', obj, function(err, res) {
+        if (err) throw err;
+        connection.end();
+        return cb({name: obj.name, email: obj.email, city: obj.city});
+    })
+}
 
 function insertRating (record_id, rating, cb) {
     var connection = createConnection();

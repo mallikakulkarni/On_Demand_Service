@@ -1,0 +1,20 @@
+//
+   Created by mallika on 11/29/15.
+
+extends layout
+
+block content
+    h1 Please Login. Your Record Exists.
+    form(role="form", id="loginmodalform", action='/customer/login', method='POST')
+        div(class="row")
+            div(class="form-group col-lg-4")
+                label Email
+                input(type="email", class="form-control", placeholder="email", name="email", id="customeremail")
+        div(class="row")
+            div(class="form-group col-lg-4")
+                label Password
+                input(type="password", class="form-control", placeholder="Password", name="password", id="customerpass")
+        div(class="modal-footer")
+            button(type="submit", id="customerloginsubmit" class="btn btn-default") Submit
+            button(type="button", class="btn btn-default", data-dismiss="modal") Reset
+            hr

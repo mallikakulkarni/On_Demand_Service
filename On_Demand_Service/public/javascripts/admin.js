@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    window.ANALYTICS_BASE_URL = "http://1fc719b9.ngrok.io";
+    window.ANALYTICS_BASE_URL = "http://63c8d694.ngrok.io";
     $('.activate').click(function(e){
         e.preventDefault();
         var smID = $(this).data("id");
@@ -131,8 +131,9 @@ function fetchFromAnalytics(elementID, url, title, callback) {
 function drawgraph(elementID, data, title) {
     var categories = [];
     var values = [];
+    console.log(data);
     for(var d in data)  {
-        categories.push(new Date(data[d].id.date.$date));
+        categories.push(new Date(data[d]._id.date.$date));
         values.push(data[d].count);
     }
     $('#'+elementID).highcharts({
