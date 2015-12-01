@@ -37,6 +37,21 @@ router.get('/rateJobs', function(req, res) {
     });
 });
 
+router.post('/signup', function(req, res) {
+    validatesignup(req.body.email, function(result) {
+        if (result.exists === true) {
+            res.render('customersignup');
+        } else {
+            if (result.correctlogin === true) {
+                res.render('customerhomepage', {name: result.name, email: result.email, city: result.city});
+            } else {
+                res.render('incorrectcustomerlogin');
+            }
+        }
+    })
+});
+
+
 
 function insertRating (record_id, rating, cb) {
     var connection = createConnection();
