@@ -2,6 +2,7 @@ var assert = require('assert');
 var admin = require('../routes/admin')
 var business = require('../routes/business')
 var customer = require('../routes/customer')
+var services = require('../routes/services')
 
 
 describe('Admin', function () {
@@ -142,6 +143,17 @@ describe('Customer', function () {
     describe('getCustomerPublicView', function () {
         it('getCustomerPublicView works', function (done) {
             customer.getCustomerPublicView(1, function (response) {
+                assert.notEqual(response, null);
+                done();
+            })
+        });
+    });
+});
+
+describe('Services', function () {
+    describe('getAllServices', function () {
+        it('getAllServices works', function (done) {
+            services.getAllServices(function (response) {
                 assert.notEqual(response, null);
                 done();
             })

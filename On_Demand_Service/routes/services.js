@@ -3,8 +3,8 @@ var router = express.Router();
 var mysql = require('mysql');
 
 /* GET home page. */
-router.get('/browseservices', function(req, res, next) {
-    getAllServices(function(services) {
+router.get('/browseservices', function (req, res, next) {
+    getAllServices(function (services) {
         res.render('services', {services: services});
     });
 });
@@ -12,7 +12,7 @@ router.get('/browseservices', function(req, res, next) {
 function getAllServices(cb) {
     var connection = createConnection();
     connection.connect();
-    connection.query('SELECT * FROM service_public', function(err, rows) {
+    connection.query('SELECT * FROM service_public', function (err, rows) {
         if (err) throw err;
         connection.end();
         return cb(rows);
@@ -34,4 +34,4 @@ function createConnection() {
     return connection
 }
 
-module.exports = router;
+module.exports = {router: router, getAllServices: getAllServices};
